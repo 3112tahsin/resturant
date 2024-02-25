@@ -69,14 +69,25 @@ WSGI_APPLICATION = 'ceo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # or 'django.db.backends.postgresql'
+#         'NAME': 'try_fast',
+#         'USER': 'postgres',
+#         'PASSWORD': '123456',
+#         'HOST': 'localhost',  # or the hostname of your PostgreSQL server
+#         'PORT': '5432',  # the default PostgreSQL port
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # or 'django.db.backends.postgresql'
-        'NAME': 'try_fast',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',  # or the hostname of your PostgreSQL server
-        'PORT': '5432',  # the default PostgreSQL port
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'restaurantp',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
