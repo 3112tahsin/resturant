@@ -1,12 +1,186 @@
 from django.contrib import admin
-
-from restaurant.models import ContactAddress
+from django.utils.html import format_html, mark_safe
+from restaurant.models import About, ChooseUs, Contact_Us, FunFactor, Openhoure, Reservation, Testimonial, blogList, contact_Address, teamMembers
 
 # Register your models here.
 # Contact page admin here.
 class AddressAdmin(admin.ModelAdmin):
-    list_filter = ('phone_no',)
-    search_fields = ('phone_no',)
-    list_display = ('phone_no', 'address','email','logo','contact_information','background_image')
+    list_filter = ('primary_phone_no',)
+    search_fields = ('primary_phone_no',)
+    list_display = ('primary_phone_no', 'primary_email', 'address', 'display_logo')
 
-admin.site.register(ContactAddress, AddressAdmin)
+    def display_logo(self, obj):
+        # Check if the logo exists
+        if obj.logo:
+            return format_html('<img src="{}" style="max-height: 50px; max-width: 100px;" />', obj.logo.url)
+        else:
+            return 'No logo'
+
+    display_logo.allow_tags = True
+    display_logo.short_description = 'Logo'
+
+admin.site.register(contact_Address, AddressAdmin)
+
+# Contuct Us admin here.
+class ContactAdminForms(admin.ModelAdmin):
+    list_filter = ('name', 'email','date_time' )
+    search_fields = ('name', 'email', 'messages')
+    list_per_page = 10
+    list_display = ('name', 'email', 'formatted_messages', 'phone', 'date_time', 'is_read_icon') 
+
+    # Define a custom admin action to mark messages as read
+    actions = ['mark_as_read']
+
+    def formatted_messages(self, obj):
+        if obj.is_read:
+            return obj.messages
+        else:
+            formatted_message = format_html('<strong font-weight: bold; style="color: black;">{}</strong>', obj.messages)
+            return mark_safe(formatted_message)
+    formatted_messages.short_description = "Message"
+
+    def mark_as_read(self, request, queryset):
+        queryset.update(is_read=True)
+    mark_as_read.short_description = "Mark selected messages as read"
+
+    def is_read_icon(self, obj):
+        return format_html('<span style="color: {}; font-weight: bold; font-size: 15px;">{}</span>',
+                        'green' if obj.is_read else 'red',
+                        '✓' if obj.is_read else '✗')
+
+    is_read_icon.short_description = "Is Read"
+    is_read_icon.admin_order_field = 'is_read'
+admin.site.register(Contact_Us, ContactAdminForms)
+
+# Testimonial admin here.
+class TestimonialAdmin(admin.ModelAdmin):
+    list_filter = ('clint_name',)
+    search_fields = ('clint_name',)
+    list_display_links = ('clint_name',)
+    list_display = ('id', 'clint_name', 'messages')
+
+admin.site.register(Testimonial, TestimonialAdmin)
+
+# Open Hourse admin here.
+class openAdmin(admin.ModelAdmin):
+    list_filter = ('day',)
+    search_fields = ('day',)
+    list_display_links = ('day',)
+    list_display = ('id', 'day', 'start_time', 'end_time')
+
+admin.site.register(Openhoure, openAdmin)
+
+# About Page admin here.
+class AboutAdmin(admin.ModelAdmin):
+    list_filter = ('title',)
+    search_fields = ('title',)
+    list_display_links = ('title',)
+    list_display = ('id', 'title', 'detailes', 'full_detailes', 'slider_image')
+
+admin.site.register(About, AboutAdmin)
+
+# About Page FunFactor admin here.
+class FunFactorAdmin(admin.ModelAdmin):
+    list_filter = ('title',)
+    search_fields = ('title',)
+    list_display_links = ('title',)
+    list_display = ('id', 'title', 'values', 'icone')
+
+admin.site.register(FunFactor, FunFactorAdmin)
+
+# About Page Choose Us admin here.
+class ChooseUsAdmin(admin.ModelAdmin):
+    list_filter = ('chooseUs_title',)
+    search_fields = ('chooseUs_title',)
+    list_display_links = ('chooseUs_title',)
+    list_display = ('chooseUs_title', 'choose_image', 'chef_title', 'total_tables','tables_detailes','our_chefs_title')
+
+admin.site.register(ChooseUs, ChooseUsAdmin)
+
+# Team Members Page admin here.
+class TeamAdmin(admin.ModelAdmin):
+    list_filter = ('name',)
+    search_fields = ('name',)
+    list_display_links = ('name',)
+    list_display = ('id', 'name', 'picture', 'sort_details')
+
+admin.site.register(teamMembers, TeamAdmin)
+
+
+# Blog Page admin here.
+class blogAdmin(admin.ModelAdmin):
+    list_filter = ('blog_title',)
+    search_fields = ('blog_title',)
+    list_per_page = 5
+    list_display_links = ('blog_title',)
+    list_display = ('id', 'blog_title', 'display_blog_image', 'date', 'top_details', 'display_home_image', 'display_top_image', 'banner_details')
+
+    def display_blog_image(self, obj):
+        if obj.blog_image:
+            return format_html('<img src="{}" width="50" />', obj.blog_image.url)
+        else:
+            return 'No Image'
+    display_blog_image.short_description = 'Blog Image'
+
+    def display_home_image(self, obj):
+        if obj.home_image:
+            return format_html('<img src="{}" width="50" />', obj.home_image.url)
+        else:
+            return 'No Image'
+    display_home_image.short_description = 'Home Image'
+
+    def display_top_image(self, obj):
+        if obj.top_image:
+            return format_html('<img src="{}" width="50" />', obj.top_image.url)
+        else:
+            return 'No Image'
+    display_top_image.short_description = 'Top Image'
+
+admin.site.register(blogList, blogAdmin)
+
+# Reservation admin here.
+class ReservationAdminForms(admin.ModelAdmin):
+    list_filter = ('name', 'email', 'date_time')
+    search_fields = ('name', 'email', 'phone')
+    list_per_page = 15
+    list_display_links = ('name',)
+    list_display = (
+        'id',
+        'name',
+        'formatted_email',
+        'formatted_phone',
+        'reservation_date',
+        'reservation_time',
+        'total_person',
+        'formatted_date_time',
+        'is_read_icon'
+    )
+
+    def formatted_email(self, obj):
+        return self.formatted_field(obj, 'email')
+    formatted_email.short_description = 'Email'
+
+    def formatted_phone(self, obj):
+        return self.formatted_field(obj, 'phone')
+    formatted_phone.short_description = 'Phone'
+
+    def formatted_date_time(self, obj):
+        return self.formatted_field(obj, 'date_time')
+    formatted_date_time.short_description = 'Date Time'
+
+    def formatted_field(self, obj, field_name):
+        field_value = getattr(obj, field_name)
+        if not obj.is_read:  # Apply formatting only if is_read is False
+            return format_html('<strong style="color: black;">{}</strong>', field_value)
+        return field_value  # Otherwise, return the field value as is
+
+    def is_read_icon(self, obj):
+        if obj.is_read:
+            return format_html('<span style="color: green; font-weight: bold;">✓</span>')
+        else:
+            return format_html('<span style="color: red; font-weight: bold;">✗</span>')
+
+    is_read_icon.short_description = 'Is Read'
+    is_read_icon.admin_order_field = 'is_read'
+
+admin.site.register(Reservation, ReservationAdminForms)

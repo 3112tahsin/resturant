@@ -6,33 +6,35 @@
         <div class="col-sm-6 col-md-6 col-lg-3">
           <!-- Footer Widget Start -->
           <h5>Contact Us</h5>
+          {% for contactAddresses in contactAddresses %}
           <ul class="list-unstyled contact">
             <li>
-              <i class="fa-solid fa-location-dot"></i> 20, floor, Restaurant
-              Food & Drinks, Nr, Queenslad Victoria Building, USA
+              <i class="fa-solid fa-location-dot"></i> {{ contactAddresses.address }}
             </li>
             <li>
-              <i class="fa-solid fa-phone"></i> 1800 000 0000,<br />+88 123
-              1234 1234
+              <i class="fa-solid fa-phone"></i> {{ contactAddresses.primary_phone_no }},<br />
+               {{ contactAddresses.phone_no }}
             </li>
             <li>
               <a href="#"
                 ><i class="fa-solid fa-envelope"></i
-                >info@yourdomainname.com</a
+                >{{ contactAddresses.primary_email }}
+                </a
               >
             </li>
           </ul>
+          {% endfor %}
           <!-- Footer Widget End -->
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">
           <!-- Footer Widget Start -->
           <h5>Information</h5>
           <ul class="list-unstyled">
-            <li><a href="#">About us</a></li>
+            <li><a href="{% url 'about' %}">About us</a></li>
             <li><a href="#">Delivery Information</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">Terms & Conditions</a></li>
-            <li><a href="#">Reservation</a></li>
+            <li><a href="{% url 'contact' %}">Contact us</a></li>
+            <li><a href="{% url 'contact' %}">Terms & Conditions</a></li>
+            <li><a href="{% url 'reservation' %}">Reservation</a></li>
           </ul>
           <!-- Footer Widget End -->
         </div>
@@ -41,11 +43,9 @@
           <!-- Footer Widget Start -->
           <h5>Open Hours</h5>
           <ul class="list-unstyled">
-            <li>Monday - Friday : 9 am to 12 am.</li>
-            <li>Saturday - Sunday : 24 Hour Open</li>
-            <li>Breakfast : 7 am to 12 pm</li>
-            <li>Lunch : 12 pm to 7 pm</li>
-            <li>Dinner : 7 am to 12 am</li>
+            {% for opEn in opEn %}
+            <li>{{ opEn.day }} : {{ opEn.start_time }} to {{ opEn.end_time }}</li>
+            {% endfor %}
           </ul>
           <!-- Footer Widget End -->
         </div>
@@ -80,7 +80,7 @@
             </li>
             <li>
               <a href="#"
-                ><img src="assets/images/instagram/6.jpg" alt="image"
+                ><img src="{% static 'assets/images/instagram/6.jpg' %}" alt="image"
               /></a>
             </li>
           </ul>
@@ -93,12 +93,14 @@
         <div class="row powered">
           <!--  Copyright Start -->
           <div class="col-md-3 col-sm-6 order-md-1">
+            {% for contactAddresses in contactAddresses %}
             <img
-              src="assets/images/logo/logo-white.png"
+              src="{{ contactAddresses.logo.url }}"
               class="img-fluid"
               title="logo"
               alt="logo"
             />
+            {% endfor %}
           </div>
           <div class="col-md-3 col-sm-6 text-right order-md-3">
             <!--  Footer Social Start -->

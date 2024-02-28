@@ -88,6 +88,15 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        },
+        'TEST': {
+            'CHARSET': 'UTF8MB4',
+            'COLLATION': 'utf8mb4_general_ci',
+        },
+        'CONN_MAX_AGE': 300,
+        'ATOMIC_REQUESTS': True
     }
 }
 
@@ -137,12 +146,18 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# #Email_sending start Heare....
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tahsinhossen58@gmail.com'
+EMAIL_HOST_PASSWORD = 'mcte czhz sbdv jixf'
 
 
 

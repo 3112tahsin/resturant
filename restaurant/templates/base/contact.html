@@ -12,7 +12,7 @@
             <div class="matter">
                 <h2>Contact Us</h2>
                 <ul class="list-inline">
-                    <li class="list-inline-item"><a href="index.html">HOME</a></li>
+                    <li class="list-inline-item"><a href="{% url 'home' %}">HOME</a></li>
                     <li class="list-inline-item"><a href="#">Contact us</a></li>
                 </ul>
             </div>
@@ -26,19 +26,31 @@
             <div class="row">
                 <!-- Title Content Start -->
                 <div class="col-sm-12 commontop text-center">
+                    <div> 
+                        {% if messages %}
+                             {% for message in messages %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                     {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                     <h4>Get In Touch</h4>
                     <div class="divider style-1 center">
                         <span class="hr-simple left"></span>
                         <i class="icofont icofont-ui-press hr-icon"></i>
                         <span class="hr-simple right"></span>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.</p>
+                    {% for contactAddresses in contactAddresses %}
+                    <p>{{ contactAddresses.top_title}}</p>
+                    {% endfor %}
                 </div>
                 <!-- Title Content End -->
 
                 <div class="col-md-5 col-12">
                     <!--  Contact form Start  -->
                     <form method="post" enctype="multipart/form-data" class="form-horizontal">
+                        {% csrf_token %}
                         <div class="form-group row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <i class="icofont icofont-ui-user"></i>
@@ -60,7 +72,7 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <i class="icofont icofont-pencil-alt-5"></i>
-                                <textarea name="enquiry" id="input-enquiry" class="form-control" rows="5" placeholder="message"></textarea>
+                                <textarea name="messages" id="input-enquiry" class="form-control" rows="5" placeholder="message"></textarea>
                             </div>
                         </div>
                         <div class="buttons">
@@ -86,6 +98,7 @@
     <div class="address">
         <div class="container">
             <div class="row">
+                {% for contactAddresses in contactAddresses %}
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="address-box">
                         <div class="box text-center">
@@ -93,7 +106,7 @@
                                 <i class="icofont icofont-home"></i>
                             </div>
                             <h4>ADDRESS</h4>
-                            <p>20, floor, Restaurant Food & Drinks, Nr, Queenslad Victoria Building, USA</p>
+                            <p>{{contactAddresses.address}}</p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +117,7 @@
                                 <i class="icofont icofont-phone"></i>
                             </div>
                             <h4>PHONE NO.</h4>
-                            <p>1800 000 0000,<br>+88 123 1234 1234</p>
+                            <p>{{contactAddresses.primary_phone_no}},<br>{{contactAddresses.phone_no}}</p>
                         </div>	
                     </div>	
                 </div>
@@ -115,10 +128,13 @@
                                 <i class="icofont icofont-ui-message"></i>	
                             </div>
                             <h4>EMAIL</h4>
-                            <p><a href="#">info@yourdomainname.com</a><br><a href="#">contact@yourdomainname.com</a></p>
+                            <p><a href="#">{{contactAddresses.primary_email}}</a><br>
+                                <a href="#">{{contactAddresses.email}}</a>
+                            </p>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="address-box">
                         <div class="box social">
@@ -158,18 +174,12 @@
                     <!-- Title Content End -->
                     <div class="col-sm-12 col-xs-12">
                         <div class="owl-carousel owl-theme owl-testi">
+                            {% for testMonial in testMonial %}
                             <div class="item">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.</p>
-                                <span>- Kapil Patel</span>
+                                <p>{{ testMonial.messages }}</p>
+                                <span>- {{ testMonial.clint_name }}</span>
                             </div>
-                            <div class="item">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.</p>
-                                <span>- Nicole Oliver</span>
-                            </div>
-                            <div class="item">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.</p>
-                                <span>- Brian Mills</span>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

@@ -14,7 +14,7 @@
     <div class="banner-detail">
       <div class="container">
         <img
-          src="assets/images/logo/iconb.png"
+          src="{% static 'assets/images/logo/iconb.png' %}"
           alt="logo1"
           title="logo1"
           class="img-responsive"/>
@@ -1565,11 +1565,12 @@
         <div class="col-md-12 col-12">
           <!-- Reservation Form Start -->
           <form
-            action="mailer.php"
+            action="#"
             method="post"
             class="row reservation-form"
             novalidate="novalidate"
           >
+          {% csrf_token %}
             <div class="form-group col-md-4 col-sm-6">
               <i class="icofont icofont-ui-user"></i
               ><input
@@ -1595,7 +1596,7 @@
             <div class="form-group col-md-4 col-sm-6">
               <i class="icofont icofont-phone"></i
               ><input
-                name="mobile"
+                name="phone"
                 placeholder="mobile number"
                 id="input-mobile"
                 class="form-control"
@@ -1606,8 +1607,8 @@
             <div class="form-group col-md-4 col-sm-6">
               <i class="icofont icofont-ui-calendar"></i
               ><input
-                name="date"
-                placeholder="date"
+                name="reservation_date"
+                placeholder="2024-02-02 (Date)"
                 id="input-date"
                 class="form-control"
                 type="text"
@@ -1617,8 +1618,8 @@
             <div class="form-group col-md-4 col-sm-6">
               <i class="icofont icofont-clock-time"></i
               ><input
-                name="time"
-                placeholder="time"
+                name="reservation_time"
+                placeholder="06:40 (Time)"
                 id="input-time"
                 class="form-control"
                 type="text"
@@ -1628,7 +1629,7 @@
             <div class="form-group col-md-4 col-sm-6">
               <i class="icofont icofont-users"></i
               ><input
-                name="persons"
+                name="total_person"
                 placeholder="number of persons"
                 id="input-persons"
                 class="form-control"
@@ -1697,78 +1698,31 @@
             </p>
           </div>
           <!-- Title Content End -->
+          {% for blogObj in blogObj %}
           <div class="col-sm-4">
             <!-- Single Blog Start -->
             <div class="box">
               <img
-                src="assets/images/blog/b1.jpg"
+                src="{{ blogObj.home_image.url }}"
                 class="img-fluid"
                 alt="image"
                 title="image"
               />
               <div class="caption">
-                <h4>Blog Title Here</h4>
-                <p class="text">May 15, 2017 / By admin / 3 Comments</p>
+                <h4>{{ blogObj.blog_title | slice:":15" }}</h4>
+                <p class="text">{{ blogObj.date }} / By admin / 3 Comments</p>
                 <p class="des">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam efficitur placerat nulla, in suscipit erat sodales
-                  id. Nullam ultricies eu turpis at accumsan...
+                  {{ blogObj.top_details | slice:":150"}}...
                 </p>
-                <a class="btn btn-theme-alt btn-md" href="#"
+                <a class="btn btn-theme-alt btn-md" href="{% url 'blog' blogObj.pk %}"
                   >Read More <i class="fas fa-chevron-right"></i
                 ></a>
               </div>
             </div>
             <!-- Single Blog End -->
           </div>
-          <div class="col-sm-4">
-            <!-- Single Blog Start -->
-            <div class="box">
-              <img
-                src="assets/images/blog/b2.jpg"
-                class="img-fluid"
-                alt="image"
-                title="image"
-              />
-              <div class="caption">
-                <h4>Blog Title Here</h4>
-                <p class="text">May 15, 2017 / By admin / 3 Comments</p>
-                <p class="des">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam efficitur placerat nulla, in suscipit erat sodales
-                  id. Nullam ultricies eu turpis at accumsan...
-                </p>
-                <a class="btn btn-theme-alt btn-md" href="#"
-                  >Read More <i class="fas fa-chevron-right"></i
-                ></a>
-              </div>
-            </div>
-            <!-- Single Blog End -->
-          </div>
-          <div class="col-sm-4">
-            <!-- Single Blog Start -->
-            <div class="box">
-              <img
-                src="assets/images/blog/b3.jpg"
-                class="img-fluid"
-                alt="image"
-                title="image"
-              />
-              <div class="caption">
-                <h4>Blog Title Here</h4>
-                <p class="text">May 15, 2017 / By admin / 3 Comments</p>
-                <p class="des">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam efficitur placerat nulla, in suscipit erat sodales
-                  id. Nullam ultricies eu turpis at accumsan...
-                </p>
-                <a class="btn btn-theme-alt btn-md" href="#"
-                  >Read More <i class="fas fa-chevron-right"></i
-                ></a>
-              </div>
-            </div>
-            <!-- Single Blog End -->
-          </div>
+          {% endfor %}
+         
         </div>
       </div>
     </div>

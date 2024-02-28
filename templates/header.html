@@ -1,27 +1,27 @@
 {% load static %}
-       <!-- Loader Start -->
-       <div class="loader">
-        <div class="loader-inner">
-          <h4>Cooking in progress..</h4>
-          <div id="cooking">
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div id="area">
-              <div id="sides">
-                <div id="pan"></div>
-                <div id="handle"></div>
-              </div>
-              <div id="pancake">
-                <div id="pastry"></div>
-              </div>
+    <!-- Loader Start -->
+    <div class="loader">
+      <div class="loader-inner">
+        <h4>Cooking in progress..</h4>
+        <div id="cooking">
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div id="area">
+            <div id="sides">
+              <div id="pan"></div>
+              <div id="handle"></div>
+            </div>
+            <div id="pancake">
+              <div id="pastry"></div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Loader End -->
+    </div>
+    <!-- Loader End -->
 
       <!--  Header Start  -->
       <header>
@@ -31,9 +31,11 @@
             <div class="row">
               <div class="col-sm-12 col-12">
                 <ul class="list-inline float-left icon">
+                  {% for contactAddresses in contactAddresses %}
                   <li class="list-inline-item">
-                    <a href="tel:+880 1789 895623"><i class="fa-solid fa-phone"></i> Hotline : +880 1789 895623</a>
+                    <a href="tel:+880 1789 895623"><i class="fa-solid fa-phone"></i> Hotline : {{ contactAddresses.primary_phone_no}}</a>
                   </li>
+                  {% endfor %}
                 </ul>
                 <!-- Header Social Start -->
                 <ul class="list-inline float-right icon">
@@ -99,11 +101,12 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-12">
               <!-- Logo Start  -->
+  
               <div id="logo">
-                <a href="{% url 'home' %}"><img
+                <a href="index.html"><img
                     id="logo_img"
                     class="img-fluid"
-                    src="assets/images/logo/logo.png"
+                    src="{% static 'assets/images/logo/logo-white.png' %}"
                     alt="logo"
                     title="logo"/></a>
               </div>
@@ -136,7 +139,14 @@
                         <a href="{% url 'menu' %}" class="toggle">Our Menu</a>
                       </li>
                       <li class="nav-item dropdown">
-                        <a href="{% url 'blog' %}" class="toggle">Our Blog</a>
+                        {% if blogObj %}
+                            {% with first_blog=blogObj.first %}
+                                <a href="{% url 'blog' pk=first_blog.pk %}" class="toggle">Our Blog</a>
+                            {% endwith %}
+                        {% else %}
+                            No blogs found.
+                        {% endif %}
+                        <!-- <a href="{% url 'blog' pk=1 %}" class="toggle">Our Blog</a> -->
                       </li>
                       <li class="nav-item dropdown">
                         <a href="{% url 'contact' %}" class="toggle">contact us</a>
