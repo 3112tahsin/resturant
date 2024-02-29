@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from restaurant.forms import ContactForm, ReservationForm
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.db.models import Q
 from restaurant.models import About, AllSections, ChooseUs, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Testimonial, blogList, contact_Address, teamMembers
 
 # Create your views here.
@@ -98,7 +99,7 @@ def about(request):
         'blogObj': blogObj,
     }
     return render(request, 'base/about.html', context)
-from django.db.models import Q
+
 # Blog page views here.
 def blog(request, pk):  # pk parameter is required
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
