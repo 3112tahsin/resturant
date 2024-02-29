@@ -11,7 +11,7 @@
         <div class="matter">
             <h2>Register</h2>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="index.html">HOME</a></li>
+                <li class="list-inline-item"><a href="{% url 'home' %}">HOME</a></li>
                 <li class="list-inline-item"><a href="#">Register</a></li>
             </ul>
         </div>
@@ -37,7 +37,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="loginnow">
                             <h5>Register</h5>
-                            <p>Do You have an account? So <a href="login.html">login</a> And starts less than a minute</p>
+                            <p>Do You have an account? So <a href="{% url 'login' %}">login</a> And starts less than a minute</p>
                             <form method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <i class="icofont icofont-ui-user"></i><input type="text" name="name" value="" placeholder="NAME" id="input-name" class="form-control" />

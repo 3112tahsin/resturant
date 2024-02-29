@@ -98,7 +98,7 @@ def about(request):
         'blogObj': blogObj,
     }
     return render(request, 'base/about.html', context)
-
+from django.db.models import Q
 # Blog page views here.
 def blog(request, pk):  # pk parameter is required
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
@@ -107,7 +107,16 @@ def blog(request, pk):  # pk parameter is required
     allSections = AllSections.objects.all().order_by('-id')[:1]
 
    
-    blogObj = blogList.objects.all()
+    blogObj = blogList.objects.all().order_by('-id')
+
+     # Search functionality
+    query = request.GET.get('s')
+    if query:
+        blogObj = blogObj.filter(
+            Q(blog_title__icontains=query) | 
+            Q(date__icontains=query) | 
+            Q(top_details__icontains=query)
+            )
     
     # Check if a specific blog post is requested
     if pk:

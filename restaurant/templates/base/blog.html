@@ -241,12 +241,11 @@
               <div class="sidebar-box">
                 <!--  Search widget Start  -->
                 <div class="search">
-                  <form class="form-horizontal" method="post">
+                  <form class="form-horizontal" method="get" action="#">
                     <fieldset>
                       <div class="form-group">
                         <input
-                          name="s"
-                          value=""
+                          value="{{ request.GET.s }}" name="s"
                           class="form-control"
                           placeholder="Search"
                           type="text"
