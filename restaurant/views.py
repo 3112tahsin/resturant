@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from restaurant.forms import ContactForm, ReservationForm
 from django.contrib import messages
 from django.core.mail import send_mail
-from restaurant.models import About, ChooseUs, FunFactor, Openhoure, Testimonial, blogList, contact_Address, teamMembers
+from restaurant.models import About, AllSections, ChooseUs, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Testimonial, blogList, contact_Address, teamMembers
 
 # Create your views here.
 
@@ -12,8 +12,13 @@ def home(request):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
 
     blogObj = blogList.objects.all().order_by('-id')[:3]
+
+    popularDishes = PopularDishes.objects.all()
+    MenucAT = MenuCategory.objects.all().order_by('id')[:6]
+    dishesMenu = DishesMenu.objects.all()
 
 
     # Reservation Form Booking Statrt
@@ -40,7 +45,7 @@ def home(request):
                 contactfo.save()
 
                 # Send an email
-                email_subject = 'Reservation Submission From Website'
+                email_subject = 'Reservation Booking Submission From Website'
                 message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\nReservation_date: {reservation_date}\nReservation_time: {reservation_time}\nPerson:\n{body}'
                 from_email = 'tahsinhossen58@gmail.com'  # Replace with your email
                 recipient_list = ['tahsinhossen58@gmail.com']  # Replace with your recipient's email
@@ -59,7 +64,11 @@ def home(request):
         'contactAddresses': contactAddresses,
         'testMonial': testMonial,
         'opEn': opEn,
+        'allSections': allSections,
         'blogObj': blogObj,
+        'popularDishes': popularDishes,
+        'MenucAT': MenucAT,
+        'dishesMenu': dishesMenu,
     }
     return render(request, 'base/home.html', context)
 
@@ -95,6 +104,7 @@ def blog(request, pk):  # pk parameter is required
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
 
    
     blogObj = blogList.objects.all()
@@ -108,6 +118,7 @@ def blog(request, pk):  # pk parameter is required
         'contactAddresses': contactAddresses,
         'testMonial': testMonial,
         'opEn': opEn,
+        'allSections': allSections,
         'blogObj': blogObj,
         'blog': blog,
     }
@@ -120,6 +131,7 @@ def contact(request):
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
     blogObj = blogList.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
 
 
     # Contact Form Booking Statrt
@@ -165,6 +177,7 @@ def contact(request):
         'contactfo': contactfo,
         'opEn': opEn,
         'blogObj': blogObj,
+        'allSections': allSections,
     }
     return render(request, 'base/contact.html', context)
 
@@ -200,7 +213,7 @@ def reservation(request):
                 contactfo.save()
 
                 # Send an email
-                email_subject = 'Reservation Submission From Website'
+                email_subject = 'Reservation Booking Submission From Website'
                 message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\nReservation_date: {reservation_date}\nReservation_time: {reservation_time}\nPerson:\n{body}'
                 from_email = 'tahsinhossen58@gmail.com'  # Replace with your email
                 recipient_list = ['tahsinhossen58@gmail.com']  # Replace with your recipient's email
@@ -250,15 +263,62 @@ def menu(request):
     testMonial = Testimonial.objects.all()
     funFactor = FunFactor.objects.all()[0:4]
     opEn = Openhoure.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
     blogObj = blogList.objects.all()
+
+    popularDishes = PopularDishes.objects.all()
+    MenucAT = MenuCategory.objects.all().order_by('id')[:6]
+    dishesMenu = DishesMenu.objects.all()
+
+    # Reservation Form Booking Statrt
+    contactfo = ReservationForm()
+    if request.method == 'POST':
+        contactfo = ReservationForm(request.POST)
+        if contactfo.is_valid():
+            contactfo.save()
+            print(messages.success(request, "Thanks ! We received your message and will respond shortly."))
+            #return redirect('reservation')
+        else:
+            print(contactfo.errors)
+
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():   # Send email
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            reservation_date = form.cleaned_data['reservation_date']
+            reservation_time = form.cleaned_data['reservation_time']
+            body = form.cleaned_data['total_person']
+            if contactfo.is_valid():
+                contactfo.save()
+
+                # Send an email
+                email_subject = 'Reservation Booking Submission From Website'
+                message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\nReservation_date: {reservation_date}\nReservation_time: {reservation_time}\nPerson:\n{body}'
+                from_email = 'tahsinhossen58@gmail.com'  # Replace with your email
+                recipient_list = ['tahsinhossen58@gmail.com']  # Replace with your recipient's email
+
+                send_mail(email_subject, message, from_email, recipient_list, fail_silently=False)
+                return redirect('reservation')
+                
+            else:
+                print(messages.error(request, "Contact Messages Send Not Success."))
+
+    else:
+         form = ReservationForm()
 
 
     context = {
         'contactAddresses': contactAddresses,
         'testMonial': testMonial,
         'opEn': opEn,
+        'allSections': allSections,
         'funFactor': funFactor,
         'blogObj': blogObj,
+        'popularDishes': popularDishes,
+        'dishesMenu': dishesMenu,
+        'MenucAT': MenucAT,
     }
     return render(request, 'base/menu.html', context)
 

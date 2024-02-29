@@ -50,21 +50,20 @@
             <i class="icofont icofont-ui-press hr-icon"></i>
             <span class="hr-simple right"></span>
           </div>
+          {% for allSections in allSections %}
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            efficitur placerat nulla, in suscipit erat sodales id. Nullam
-            ultricies eu turpis at accumsan. Mauris a sodales mi, eget
-            lobortis nulla.
+            {{ allSections.order_delivery_title}}
           </p>
+          {% endfor %}
         </div>
         <!-- Title Content End -->
         <div class="col-lg-7 col-sm-12">
           <!-- Search Form Start -->
-          <form class="form-horizontal search-icon" method="post">
+          <form class="form-horizontal search-icon" method="">
             <fieldset>
               <div class="form-group">
                 <input
-                  name="s"
+                  name=""
                   value=""
                   placeholder="Search keyword"
                   class="form-control"
@@ -91,7 +90,7 @@
             </li>
           </ul>
           <img
-            src="assets/images/lines.png"
+            src="{% static 'assets/images/lines.png' %}"
             alt="line"
             title="line"
             class="img-fluid"/>
@@ -113,186 +112,29 @@
             <i class="icofont icofont-ui-press hr-icon"></i>
             <span class="hr-simple right"></span>
           </div>
+          {% for allSections in allSections %}
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            efficitur placerat nulla, in suscipit erat sodales id. Nullam
-            ultricies eu turpis at accumsan. Mauris a sodales mi, eget
-            lobortis nulla.
+            {{ allSections.popular_dish_title}}
           </p>
+          {% endfor %}
         </div>
         <!-- Title Content End -->
         <div class="col-sm-12">
           <div class="dish owl-carousel">
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/01.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
+            {% for popularDishes in popularDishes %}
+              <div class="item">
+                <!-- Box Start -->
+                <div class="box">
+                  <a href="#"><img src="{{ popularDishes.dish_picture.url }}" alt="image" title="image" class="img-responsive" /></a>
+                    <div class="caption">
+                      <h4>{{ popularDishes.dish_name | slice:":16" }}</h4>
+                        <span>{{ popularDishes.details | slice:":75" }}</span>
+                        <p>${{ popularDishes.dish_price }}</p>
+                    </div>
                 </div>
+                 <!-- Box End -->
               </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/02.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/03.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/04.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/05.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span
-                    >Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/01.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/02.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/03.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/04.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
-            <div class="item">
-              <!-- Box Start -->
-              <div class="box">
-                <a href="#"><img
-                    src="assets/images/dishes/05.jpg"
-                    alt="image"
-                    title="image"
-                    class="img-fluid"/></a>
-                <div class="caption">
-                  <h4>Dish Name Here</h4>
-                  <span>Lorem ipsum is simply dummy text of the printing and
-                    type setting industry.</span>
-                  <p>$100</p>
-                </div>
-              </div>
-              <!-- Box End -->
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -301,1246 +143,77 @@
   <!-- Popular Dishes End -->
 
   <!-- Food Menu Start -->
-  <div class="menu" id="menuall">
+  <div class="menu">
     <div class="menu-inner">
-      <div class="container">
-        <div class="row">
-          <!-- Title Content Start -->
-          <div class="col-sm-12 col-12 commontop text-center">
-            <h4>Our Menu</h4>
-            <div class="divider style-1 center">
-              <span class="hr-simple left"></span>
-              <i class="icofont icofont-ui-press hr-icon"></i>
-              <span class="hr-simple right"></span>
+        <div class="container">
+            <div class="row ">
+                <!-- Title Content Start -->
+                <div class="col-sm-12 col-12 commontop text-center">
+                    <h4>Our Menu</h4>
+                    <div class="divider style-1 center">
+                        <span class="hr-simple left"></span>
+                        <i class="icofont icofont-ui-press hr-icon"></i>
+                        <span class="hr-simple right"></span>
+                    </div>
+                    {% for allSections in allSections %}
+                    <p>
+                      {{ allSections.menu_title}}
+                    </p>
+                    {% endfor %}
+                </div>
+                <!-- Title Content End -->
+                <div class="col-sm-12 col-12">
+                    <!--  Menu Tabs Start  -->
+                    <ul class="nav nav-tabs list-inline">
+                        {% for category in MenucAT %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if forloop.first %}active{% endif %}" href="#{{ category.name }}" data-toggle="tab" aria-expanded="true">{{ category.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <!--  Menu Tabs Start  -->
+
+                    <!--  Menu Tabs Content Start  -->
+                    <div  class="tab-content">
+                        <!--  Menu Tab Start  -->
+                        {% for category in MenucAT %}
+                        <div class="tab-pane {% if forloop.first %}show active{% endif %}" id="{{ category.name }}">
+                            <div class="row">
+                                {% for dish in category.dishesmenu_set.all %}
+                                <div class="col-md-6 col-sm-6 col-12">
+                                    <!-- Box Start -->
+                                    <div class="box">
+                                        <div class="image">
+                                            <img src="{{ dish.dish_picture.url }}" alt="{{ dish.dish_name }}" title="{{ dish.dish_name }}" class="img-fluid" />
+                                        </div>
+                                        <div class="caption">
+                                            <h4>{{ dish.dish_name | slice:":16" }}</h4>
+                                            <p class="des">{{ dish.dish_title | slice:":27" }}</p>
+                                            <span>{{ dish.details | slice:":75" }}</span>
+                                            <div class="price">${{ dish.dish_price }}</div>
+                                        </div>
+                                    </div>
+                                    <!-- Box End -->
+                                </div>
+                                {% endfor %}
+                                
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!--  Menu Tab End  -->
+                    </div>
+                    <!--  Menu Tabs Content End  -->
+                    <div class="text-center padbot30">
+                      <a class="btn btn-theme-alt btn-wide" href="{% url 'menu' %}"
+                        >view more <i class="fas fa-chevron-right"></i
+                      ></a>
+                    </div>
+                </div>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Nullam efficitur placerat nulla, in suscipit erat sodales id.
-              Nullam ultricies eu turpis at accumsan. Mauris a sodales mi,
-              eget lobortis nulla.
-            </p>
-          </div>
-          <!-- Title Content End -->
-          <div class="col-sm-12 col-12">
-            <!--  Menu Tabs Start  -->
-            <ul class="nav nav-tabs list-inline">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  href="#all"
-                  data-toggle="tab"
-                  aria-expanded="true"
-                  >all</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="#breakfast"
-                  data-toggle="tab"
-                  aria-expanded="false"
-                  >breakfast</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="#lunch"
-                  data-toggle="tab"
-                  aria-expanded="false"
-                  >lunch</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="#dinner"
-                  data-toggle="tab"
-                  aria-expanded="false"
-                  >dinner</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="#drinks"
-                  data-toggle="tab"
-                  aria-expanded="false"
-                  >drinks</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="#others"
-                  data-toggle="tab"
-                  aria-expanded="false"
-                  >others</a
-                >
-              </li>
-            </ul>
-            <!--  Menu Tabs Start  -->
-
-            <!--  Menu Tabs Content Start  -->
-            <div class="tab-content">
-              <!--  Menu Tab Start  -->
-              <div class="tab-pane show active" id="all">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/01.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/04.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/07.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/02.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/05.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/08.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/03.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/06.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                </div>
-              </div>
-              <!--  Menu Tab End  -->
-
-              <!--  Menu Tab Start  -->
-              <div class="tab-pane" id="breakfast">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/07.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/02.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/01.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/04.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/05.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/06.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/09.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/08.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                </div>
-              </div>
-              <!--  Menu Tab End  -->
-
-              <!--  Menu Tab Start  -->
-              <div class="tab-pane" id="lunch">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/01.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/04.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/07.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/02.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/05.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/08.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/03.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/06.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                </div>
-              </div>
-              <!--  Menu Tab End  -->
-
-              <!--  Menu Tab Start  -->
-              <div class="tab-pane" id="dinner">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/07.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/02.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/01.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/04.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/05.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/08.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/03.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/09.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                </div>
-              </div>
-              <!--  Menu Tab End  -->
-
-              <!--  Menu Tab Start  -->
-              <div class="tab-pane" id="drinks">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/01.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/04.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/07.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/02.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/05.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/08.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/03.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/06.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                </div>
-              </div>
-              <!--  Menu Tab End  -->
-
-              <!--  Menu Tab Start  -->
-              <div class="tab-pane" id="others">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/07.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/02.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/01.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/04.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/05.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/08.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/09.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-12">
-                    <!-- Box Start -->
-                    <div class="box">
-                      <div class="image">
-                        <img
-                          src="assets/images/our-menu/03.jpg"
-                          alt="image"
-                          title="image"
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="caption">
-                        <h4>Food Title Here</h4>
-                        <p class="des">Cursus / Dictum / Risus</p>
-                        <span
-                          >Lorem ipsum is simply dummy text of the printing
-                          and type setting industry.</span
-                        >
-                        <div class="price">$35.00</div>
-                      </div>
-                    </div>
-                    <!-- Box End -->
-                  </div>
-                </div>
-              </div>
-              <!--  Menu Tab End  -->
-            </div>
-            <!--  Menu Tabs Content End  -->
-            <div class="text-center padbot30">
-              <a class="btn btn-theme-alt btn-wide" href="menu.html"
-                >view more <i class="fas fa-chevron-right"></i
-              ></a>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- Food Menu End -->
+</div>
+<!-- Food Menu End -->
 
   <!-- Reservation Start -->
   <div class="reservation">
@@ -1554,12 +227,11 @@
             <i class="icofont icofont-ui-press hr-icon"></i>
             <span class="hr-simple right"></span>
           </div>
+          {% for allSections in allSections %}
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            efficitur placerat nulla, in suscipit erat sodales id. Nullam
-            ultricies eu turpis at accumsan. Mauris a sodales mi, eget
-            lobortis nulla.
+            {{ allSections.booking_table_title}}
           </p>
+          {% endfor %}
         </div>
         <!-- Title Content End -->
         <div class="col-md-12 col-12">
@@ -1690,12 +362,11 @@
               <i class="icofont icofont-ui-press hr-icon"></i>
               <span class="hr-simple right"></span>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Nullam efficitur placerat nulla, in suscipit erat sodales id.
-              Nullam ultricies eu turpis at accumsan. Mauris a sodales mi,
-              eget lobortis nulla.
-            </p>
+              {% for allSections in allSections %}
+              <p>
+                {{ allSections.blog_title}}
+              </p>
+              {% endfor %}
           </div>
           <!-- Title Content End -->
           {% for blogObj in blogObj %}
@@ -1739,10 +410,11 @@
             <div class="col-sm-6 col-md-7">
               <div class="input-group">
                 <span class="news">newsletter</span>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nam iaculis lorem augue, at quam finibus eget.
-                </p>
+                  {% for allSections in allSections %}
+                  <p>
+                    {{ allSections.newsletter}}
+                  </p>
+                  {% endfor %}
               </div>
             </div>
             <div class="col-sm-6 col-md-5 form-group">

@@ -150,4 +150,57 @@ class Reservation(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name_plural = "Reservation Clint"
+        verbose_name_plural = "Reservation Booking Clint"
+
+# Our Popular Dishes Page models here...
+class PopularDishes(models.Model):
+    dish_name = models.CharField(null=True, max_length=27)
+    dish_picture = models.ImageField(null=True, default="avatar.svg")
+    dish_price = models.CharField(null=True, max_length=27)
+    details = models.TextField(null=True)
+   
+    def __str__(self):
+        return self.dish_name
+    
+    class Meta:
+        verbose_name_plural = "Our Popular Dishes"
+
+# Menu Dishes Page models here...
+class MenuCategory(models.Model):
+    name = models.CharField(null=True, max_length=27)
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "All Menu Category"
+
+class DishesMenu(models.Model):
+    category_name = models.ForeignKey(MenuCategory, on_delete=models.CASCADE, null=True)
+    dish_name = models.CharField(null=True, max_length=27)
+    dish_title = models.CharField(null=True, max_length=27)
+    dish_picture = models.ImageField(null=True, default="avatar.svg")
+    dish_price = models.CharField(null=True, max_length=27)
+    details = models.TextField(null=True)
+   
+    def __str__(self):
+        return self.dish_name
+    
+    class Meta:
+        verbose_name_plural = "All Menu List"
+
+
+# All Sections Title models here...
+class AllSections(models.Model):
+    order_delivery_title = models.CharField(null=True, max_length=255)
+    popular_dish_title = models.CharField(null=True, max_length=255)
+    menu_title = models.CharField(null=True, max_length=255)
+    booking_table_title = models.CharField(null=True, max_length=255)
+    blog_title = models.CharField(null=True, max_length=255)
+    newsletter = models.CharField(null=True, max_length=255)
+    
+    def __str__(self):
+        return self.order_delivery_title
+    
+    class Meta:
+        verbose_name_plural = "All Page Sections Titles"

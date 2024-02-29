@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html, mark_safe
-from restaurant.models import About, ChooseUs, Contact_Us, FunFactor, Openhoure, Reservation, Testimonial, blogList, contact_Address, teamMembers
+from restaurant.models import About, AllSections, ChooseUs, Contact_Us, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Reservation, Testimonial, blogList, contact_Address, teamMembers
 
 # Register your models here.
 # Contact page admin here.
@@ -184,3 +184,42 @@ class ReservationAdminForms(admin.ModelAdmin):
     is_read_icon.admin_order_field = 'is_read'
 
 admin.site.register(Reservation, ReservationAdminForms)
+
+
+# Our Popular Dishes Page admin here.
+class PopularAdmin(admin.ModelAdmin):
+    list_filter = ('dish_name',)
+    search_fields = ('dish_name',)
+    list_display_links = ('dish_name',)
+    list_per_page = 12
+    list_display = ('id', 'dish_name', 'dish_picture', 'dish_price','details')
+
+admin.site.register(PopularDishes, PopularAdmin)
+
+class MenucasAdmin(admin.ModelAdmin):
+    list_filter = ('name',)
+    search_fields = ('name',)
+    list_display_links = ('name',)
+    list_per_page = 12
+    list_display = ('id', 'name')
+
+admin.site.register(MenuCategory, MenucasAdmin)
+
+
+class MenuAdmin(admin.ModelAdmin):
+    list_filter = ('dish_name','category_name','dish_price')
+    search_fields = ('dish_name',)
+    list_display_links = ('dish_name',)
+    list_per_page = 12
+    list_display = ('id', 'category_name', 'dish_name', 'dish_picture', 'dish_price','details')
+
+admin.site.register(DishesMenu, MenuAdmin)
+
+class TitleAdmin(admin.ModelAdmin):
+    search_fields = ('order_delivery_title',)
+    list_display_links = ('order_delivery_title',)
+    list_display = ('order_delivery_title', 'popular_dish_title','menu_title','booking_table_title','blog_title','newsletter')
+
+admin.site.register(AllSections, TitleAdmin)
+
+
