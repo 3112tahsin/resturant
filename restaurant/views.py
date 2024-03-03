@@ -405,7 +405,7 @@ def shopdetails(request , shop_id):
     else:
         shopDetails = None
 
-
+    # Dish Reviews Functionality
     reViews = CommentDish.objects.filter(dish_name=shop_id)
     if request.method == 'POST':
         form = ReviewsForm(request.POST)
@@ -416,7 +416,6 @@ def shopdetails(request , shop_id):
             return redirect('shop-details', shop_id=shop_id) 
     else:
         form = ReviewsForm()
-
 
     context = {
         'contactAddresses': contactAddresses,
