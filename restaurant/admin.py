@@ -1,8 +1,15 @@
+from tokenize import Comment
 from django.contrib import admin
 from django.utils.html import format_html, mark_safe
-from restaurant.models import About, AllSections, ChooseUs, Contact_Us, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Reservation, Testimonial, blogList, contact_Address, teamMembers
+from restaurant.models import About, AllSections, ChooseUs, CommentBlog, CommentDish, Contact_Us, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Reservation, Testimonial, User, blogList, contact_Address, teamMembers
 
 # Register your models here.
+
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('email', 'username', 'picture')
+
+admin.site.register(User, UserAdmin)
+
 # Contact page admin here.
 class AddressAdmin(admin.ModelAdmin):
     list_filter = ('primary_phone_no',)
@@ -138,6 +145,15 @@ class blogAdmin(admin.ModelAdmin):
 
 admin.site.register(blogList, blogAdmin)
 
+# Comments Blog Page admin here.
+class CommentAdmin(admin.ModelAdmin):
+    list_filter = ('name',)
+    search_fields = ('name',)
+    list_display_links = ('name',)
+    list_display = ('id', 'blog_name', 'name', 'email','body','created','active')
+
+admin.site.register(CommentBlog, CommentAdmin)
+
 # Reservation admin here.
 class ReservationAdminForms(admin.ModelAdmin):
     list_filter = ('name', 'email', 'date_time')
@@ -195,6 +211,15 @@ class PopularAdmin(admin.ModelAdmin):
     list_display = ('id', 'dish_name', 'dish_picture', 'dish_price','details')
 
 admin.site.register(PopularDishes, PopularAdmin)
+
+# Dish Reviews Page admin here.
+class RewiewsAdmin(admin.ModelAdmin):
+    list_filter = ('name',)
+    search_fields = ('name',)
+    list_display_links = ('name',)
+    list_display = ('id', 'dish_name', 'name', 'email','body','created','active')
+
+admin.site.register(CommentDish, RewiewsAdmin)
 
 class MenucasAdmin(admin.ModelAdmin):
     list_filter = ('name',)

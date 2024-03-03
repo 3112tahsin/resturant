@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from restaurant.forms import ContactForm, ReservationForm
+from restaurant.forms import CommentForm, ContactForm, RegistrationForm, ReservationForm, ReviewsForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.db.models import Q
-from restaurant.models import About, AllSections, ChooseUs, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Testimonial, blogList, contact_Address, teamMembers
+from restaurant.models import About, AllSections, ChooseUs, CommentBlog, CommentDish, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Testimonial, blogList, contact_Address, teamMembers
 
 # Create your views here.
 
@@ -124,6 +124,20 @@ def blog(request, pk):  # pk parameter is required
         blog = get_object_or_404(blogList, id=pk)
     else:
         blog = None
+
+    # Blog Comment Functionality
+    comments = CommentBlog.objects.filter(blog_name=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog_name = blog 
+            comment.save()
+            return redirect('blog', pk=pk) 
+    else:
+        form = CommentForm()
+
     context = {
         'contactAddresses': contactAddresses,
         'testMonial': testMonial,
@@ -131,6 +145,8 @@ def blog(request, pk):  # pk parameter is required
         'allSections': allSections,
         'blogObj': blogObj,
         'blog': blog,
+        'comments': comments,
+        'form': form,
     }
    
     return render(request, 'base/blog.html', context)
@@ -338,6 +354,17 @@ def shop(request):
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
     blogObj = blogList.objects.all()
+    MenucAT = MenuCategory.objects.all().order_by('id')
+    popularDishes = PopularDishes.objects.all()
+
+     # Search functionality
+    query = request.GET.get('s')
+    if query:
+        popularDishes = popularDishes.filter(
+            Q(dish_name__icontains=query) | 
+            Q(dish_price=query) | 
+            Q(details__icontains=query)
+            )
 
 
     context = {
@@ -345,15 +372,50 @@ def shop(request):
         'testMonial': testMonial,
         'opEn': opEn,
         'blogObj': blogObj,
+        'popularDishes': popularDishes,
+        'MenucAT': MenucAT,
     }
     return render(request, 'base/shop.html', context)
 
 # Shop-details page views here.
-def shopdetails(request):
+def shopdetails(request , shop_id):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
-    blogObj = blogList.objects.all()
+   
+    MenucAT = MenuCategory.objects.all().order_by('id')[:6]
+    blogObj = blogList.objects.all().order_by('-id')[:6]
+
+    popularDishes = PopularDishes.objects.all().order_by('-id')[:3]
+    sHop = PopularDishes.objects.all()
+
+     # Search functionality
+    query = request.GET.get('s')
+    if query:
+        popularDishes = popularDishes.filter(
+            Q(dish_name__icontains=query) | 
+            Q(dish_price=query) | 
+            Q(details__icontains=query)
+            )
+
+
+    # Shop-details singal funcationality
+    if shop_id:
+        shopDetails = get_object_or_404(PopularDishes, id=shop_id)
+    else:
+        shopDetails = None
+
+
+    reViews = CommentDish.objects.filter(dish_name=shop_id)
+    if request.method == 'POST':
+        form = ReviewsForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.dish_name = shopDetails
+            comment.save()
+            return redirect('shop-details', shop_id=shop_id) 
+    else:
+        form = ReviewsForm()
 
 
     context = {
@@ -361,6 +423,12 @@ def shopdetails(request):
         'testMonial': testMonial,
         'opEn': opEn,
         'blogObj': blogObj,
+        'MenucAT': MenucAT,
+        'popularDishes': popularDishes,
+        'shopDetails': shopDetails,
+        'sHop': sHop,
+        'reViews': reViews,
+        'form': form,
     }
     return render(request, 'base/shop-details.html', context)
 
@@ -380,29 +448,70 @@ def shoppingcart(request):
     }
     return render(request, 'base/shopping-cart.html', context)
 
+from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib import auth
 # Contact page views here.
-def login(request):
+def loginpage(request):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
     opEn = Openhoure.objects.all()
     blogObj = blogList.objects.all()
 
+    #page = 'loginpage'
+    
+    # if request.user.is_authenticated:
+    #     #return redirect('home')
 
+    if request.method == 'POST':
+        email = request.POST.get('email','' ).lower()
+        password = request.POST.get('password', '')
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None:
+            auth_login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'base/login-page.html', {'error_message': 'Invalid login credentials. Please try again '})
+    
+
+    
     context = {
         'contactAddresses': contactAddresses,
         'testMonial': testMonial,
         'opEn': opEn,
         'blogObj': blogObj,
+        'allSections': allSections,
     }
-    return render(request, 'base/login.html', context)
+    return render(request, 'base/login-page.html', context)
 
+
+# LogoutUser views here.
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
 
 # Register page views here.
 def register(request):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
     opEn = Openhoure.objects.all()
     blogObj = blogList.objects.all()
+
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)  # Use the renamed function
+            messages.success(request, 'Registration successful. You are now logged in.')
+            return redirect('register')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Error in {field}: {error}")
+    else:
+        form = RegistrationForm()
 
 
     context = {
@@ -410,6 +519,7 @@ def register(request):
         'testMonial': testMonial,
         'opEn': opEn,
         'blogObj': blogObj,
+        'allSections': allSections,
     }
     return render(request, 'base/register.html', context)
 

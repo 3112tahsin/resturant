@@ -4,6 +4,55 @@ from django.utils import timezone
 
 # Create your models here.
 
+# User Registtions page models here.
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError(_('The Email field must be set'))
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(email, password, **extra_fields)
+        
+class User(AbstractUser):
+    username = models.CharField(max_length=150)
+    user_phone_no = models.CharField(max_length=20,)
+    email = models.EmailField(unique=True)
+    picture = models.ImageField(null=True, default="avatar.svg")
+
+    objects = CustomUserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='custom_user_groups',
+        blank=True,
+        verbose_name='groups',
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+    )
+
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='custom_user_permissions',
+        blank=True,
+        verbose_name='user permissions',
+        help_text='Specific permissions for this user.',
+    )
+    
+
+
+
 
 # Contact Page models here...
 class contact_Address(models.Model):
@@ -136,6 +185,20 @@ class blogList(models.Model):
     class Meta:
         verbose_name_plural = "Blog List"
 
+class CommentBlog(models.Model):
+    blog_name = models.ForeignKey(blogList, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Blog Comment" 
+
 # Reservation
 class Reservation(models.Model):
     name = models.CharField(max_length=63, null=True)
@@ -152,19 +215,6 @@ class Reservation(models.Model):
     class Meta:
         verbose_name_plural = "Reservation Booking Clint"
 
-# Our Popular Dishes Page models here...
-class PopularDishes(models.Model):
-    dish_name = models.CharField(null=True, max_length=27)
-    dish_picture = models.ImageField(null=True, default="avatar.svg")
-    dish_price = models.CharField(null=True, max_length=27)
-    details = models.TextField(null=True)
-   
-    def __str__(self):
-        return self.dish_name
-    
-    class Meta:
-        verbose_name_plural = "Our Popular Dishes"
-
 # Menu Dishes Page models here...
 class MenuCategory(models.Model):
     name = models.CharField(null=True, max_length=27)
@@ -174,6 +224,38 @@ class MenuCategory(models.Model):
     
     class Meta:
         verbose_name_plural = "All Menu Category"
+
+# Our Popular Dishes Page models here...
+class PopularDishes(models.Model):
+    category_name = models.ForeignKey(MenuCategory, on_delete=models.CASCADE, null=True)
+    dish_name = models.CharField(null=True, max_length=27)
+    dish_title = models.CharField(null=True, max_length=27)
+    dish_picture = models.ImageField(null=True, default="avatar.svg")
+    dish_price = models.CharField(null=True, max_length=27)
+    details = models.TextField(null=True)
+    details_picture = models.ImageField(null=True, default="avatar.svg")
+    description1 = models.TextField(null=True)
+    description2 = models.TextField(null=True)
+   
+    def __str__(self):
+        return self.dish_name
+    
+    class Meta:
+        verbose_name_plural = "Our Popular Dishes"
+
+class CommentDish(models.Model):
+    dish_name = models.ForeignKey(PopularDishes, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Dish Reviews" 
 
 class DishesMenu(models.Model):
     category_name = models.ForeignKey(MenuCategory, on_delete=models.CASCADE, null=True)
@@ -190,6 +272,8 @@ class DishesMenu(models.Model):
         verbose_name_plural = "All Menu List"
 
 
+
+
 # All Sections Title models here...
 class AllSections(models.Model):
     order_delivery_title = models.CharField(null=True, max_length=255)
@@ -198,6 +282,8 @@ class AllSections(models.Model):
     booking_table_title = models.CharField(null=True, max_length=255)
     blog_title = models.CharField(null=True, max_length=255)
     newsletter = models.CharField(null=True, max_length=255)
+    login_title = models.CharField(null=True, max_length=255)
+    register_title = models.CharField(null=True, max_length=255)
     
     def __str__(self):
         return self.order_delivery_title

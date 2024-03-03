@@ -107,84 +107,35 @@
 
               <!--  Blog Comments Start  -->
               <div class="comment">
-                <h3>COMMENTS (03)</h3>
+                <h3>COMMENTS ({{ comments|length }})</h3>
                 <ul class="list-unstyled">
+                  {% for comment in comments %}
                   <li>
                     <img
-                      src="assets/images/blog-detail/01.jpg"
+                      src="{% static 'assets/images/background/comment.PNG' %}"
                       alt="img"
                       title="img"
                       class="img-fluid"
                     />
                     <div class="caption">
-                      <h5>John Doe</h5>
+                      <h5>{{ comment.name|capfirst }}</h5>
                       <span
-                        >2 days ago
+                        >{{ comment.created }}
                         <a href="#" class="float-right"
                           ><i class="icofont icofont-reply"></i> Reply</a
                         ></span
                       >
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc orci tellus, fermentum nec imperdiet sed, pulvinar
-                        et sem, Fusce hendrerit faucibus sollicitudin. Duis eu
-                        tristique elit. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit.
+                        {{ comment.body|capfirst }}
                       </p>
                     </div>
                   </li>
-                  <li>
-                    <img
-                      src="assets/images/blog-detail/02.jpg"
-                      alt="img"
-                      title="img"
-                      class="img-fluid"
-                    />
-                    <div class="caption">
-                      <h5>John Doe</h5>
-                      <span
-                        >2 days ago
-                        <a href="#" class="float-right"
-                          ><i class="icofont icofont-reply"></i> Reply</a
-                        ></span
-                      >
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc orci tellus, fermentum nec imperdiet sed, pulvinar
-                        et sem, Fusce hendrerit faucibus sollicitudin. Duis eu
-                        tristique elit. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <img
-                      src="assets/images/blog-detail/02.jpg"
-                      alt="img"
-                      title="img"
-                      class="img-fluid"
-                    />
-                    <div class="caption">
-                      <h5>John Doe</h5>
-                      <span
-                        >2 days ago
-                        <a href="#" class="float-right"
-                          ><i class="icofont icofont-reply"></i> Reply</a
-                        ></span
-                      >
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc orci tellus, fermentum nec imperdiet sed, pulvinar
-                        et sem, Fusce hendrerit faucibus sollicitudin. Duis eu
-                        tristique elit. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit.
-                      </p>
-                    </div>
-                  </li>
+                  {% endfor %}
                 </ul>
                 <h3>POST A COMMENT</h3>
                 <!--  Blog Comments Form Start  -->
                 <form class="form-horizontal" method="post">
+                  {% csrf_token %}
                   <fieldset>
                     <div class="form-group row">
                       <div class="col-sm-6">
@@ -193,7 +144,7 @@
                           placeholder="Name*"
                           id="input-name"
                           value=""
-                          name="jobname"
+                          name="name"
                           required=""
                           type="text"
                         />
@@ -216,7 +167,7 @@
                           class="form-control"
                           id="input-enquiry"
                           rows="10"
-                          name="enquiry"
+                          name="body"
                           placeholder="Write a comment"
                           required=""
                         ></textarea>
