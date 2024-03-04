@@ -284,6 +284,7 @@ class AllSections(models.Model):
     newsletter = models.CharField(null=True, max_length=255)
     login_title = models.CharField(null=True, max_length=255)
     register_title = models.CharField(null=True, max_length=255)
+    recent_food_title = models.CharField(null=True, max_length=255)
     
     def __str__(self):
         return self.order_delivery_title

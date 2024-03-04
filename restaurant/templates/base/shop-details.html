@@ -266,7 +266,11 @@
                                 <i class="icofont icofont-ui-press hr-icon"></i>
                                 <span class="hr-simple right"></span>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.</p>
+                            {% for allSections in allSections %}
+                                <p>
+                                {{ allSections.recent_food_title}}
+                                </p>
+                            {% endfor %}
                         </div>
                         <!-- Title Content End -->
                         {% for popularDish in popularDishes %}
@@ -318,10 +322,11 @@
         <div class="col-sm-6 col-md-7">
           <div class="input-group">
             <span class="news">newsletter</span>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Nam iaculis lorem augue, at quam finibus eget.
-            </p>
+            {% for allSections in allSections %}
+                <p>
+                {{ allSections.newsletter}}
+                </p>
+            {% endfor %}
           </div>
         </div>
         <div class="col-sm-6 col-md-5 form-group">

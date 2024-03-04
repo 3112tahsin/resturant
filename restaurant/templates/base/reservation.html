@@ -32,7 +32,11 @@
                         <i class="icofont icofont-ui-press hr-icon"></i>
                         <span class="hr-simple right"></span>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.</p>
+                    {% for allSections in allSections %}
+                        <p>
+                        {{ allSections.booking_table_title}}
+                        </p>
+                    {% endfor %}
                 </div>
                 <!-- Title Content End -->
                 <div class="col-md-12 col-12">

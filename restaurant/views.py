@@ -354,6 +354,7 @@ def shop(request):
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
     blogObj = blogList.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
     MenucAT = MenuCategory.objects.all().order_by('id')
     popularDishes = PopularDishes.objects.all()
 
@@ -374,6 +375,7 @@ def shop(request):
         'blogObj': blogObj,
         'popularDishes': popularDishes,
         'MenucAT': MenucAT,
+        'allSections': allSections,
     }
     return render(request, 'base/shop.html', context)
 
@@ -382,6 +384,7 @@ def shopdetails(request , shop_id):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
    
     MenucAT = MenuCategory.objects.all().order_by('id')[:6]
     blogObj = blogList.objects.all().order_by('-id')[:6]
@@ -422,6 +425,7 @@ def shopdetails(request , shop_id):
         'testMonial': testMonial,
         'opEn': opEn,
         'blogObj': blogObj,
+        'allSections': allSections,
         'MenucAT': MenucAT,
         'popularDishes': popularDishes,
         'shopDetails': shopDetails,
