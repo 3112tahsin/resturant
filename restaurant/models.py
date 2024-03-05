@@ -244,6 +244,17 @@ class PopularDishes(models.Model):
     class Meta:
         verbose_name_plural = "Our Popular Dishes"
 
+# New model for Cart Items
+class CartItem(models.Model):
+    dish = models.ForeignKey(PopularDishes, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.dish.dish_name}"
+    
+    class Meta:
+        verbose_name_plural = "Cart Item"
+
 class CommentDish(models.Model):
     dish_name = models.ForeignKey(PopularDishes, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)

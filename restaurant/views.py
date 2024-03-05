@@ -3,7 +3,7 @@ from restaurant.forms import CommentForm, ContactForm, RegistrationForm, Reserva
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.db.models import Q
-from restaurant.models import About, AllSections, ChooseUs, CommentBlog, CommentDish, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Testimonial, blogList, contact_Address, teamMembers
+from restaurant.models import About, AllSections, CartItem, ChooseUs, CommentBlog, CommentDish, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Testimonial, blogList, contact_Address, teamMembers
 
 # Create your views here.
 
@@ -438,11 +438,23 @@ def shopdetails(request , shop_id):
     return render(request, 'base/shop-details.html', context)
 
 # Shopping-cart page views here.
-def shoppingcart(request):
+def shoppingcart(request, dish_id=None):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
     blogObj = blogList.objects.all()
+    cart_items = CartItem.objects.all()
+
+    for cart_item in cart_items:
+        cart_item.item_total = cart_item.quantity * cart_item.dish.dish_price
+
+
+    if dish_id is not None:  # Check if dish_id is provided
+        dish = get_object_or_404(PopularDishes, pk=dish_id)
+        cart_item, created = CartItem.objects.get_or_create(dish=dish)  # Get or create cart item
+        if not created:
+            cart_item.quantity += 1  # Increase quantity if item already exists in cart
+            cart_item.save()
 
 
     context = {
@@ -450,6 +462,7 @@ def shoppingcart(request):
         'testMonial': testMonial,
         'opEn': opEn,
         'blogObj': blogObj,
+        'cart_items': cart_items,
     }
     return render(request, 'base/shopping-cart.html', context)
 

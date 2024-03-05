@@ -47,14 +47,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for cart_item in cart_items %}
                                             <tr>
                                                 <td>
                                                     <a href="#">
-                                                        <img src="assets/images/our-menu/01.jpg" class="img-fluid" alt="thumb" title="thumb" />
+                                                        <img src="{{ cart_item.dish.dish_picture.url }}" class="img-fluid" alt="thumb" style="height: 130px; width: 130px;" title="thumb" />
                                                     </a>
                                                     <div class="name">
-                                                        <h4>Food Title Here</h4>
-                                                        <p>Curses / Dictum / Risus</p>
+                                                        <h4>{{ cart_item.dish.dish_name }}</h4>
+                                                        <p>{{ cart_item.dish.dish_title }}</p>
                                                         <div class="rating">
                                                             <i class="icofont icofont-star"></i>
                                                             <i class="icofont icofont-star"></i>
@@ -64,7 +65,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="text-center">$ 23.00</td>
+                                                <td class="text-center">$ {{ cart_item.dish.dish_price }}</td>
                                                 <td class="text-center">
                                                     <p class="qtypara">
                                                         <span id="minus1" class="minus"><i class="icofont icofont-minus"></i></span>
@@ -73,42 +74,12 @@
                                                         <input type="hidden" name="product_id" value="1" />
                                                     </p>
                                                 </td>
-                                                <td class="text-center">$23.00</td>
+                                                <td class="text-center">${{ cart_item.item_total|floatformat:"2" }}</td>
                                                 <td class="text-center">
                                                     <button type="button"><i class="icofont icofont-close-line"></i></button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="#">
-                                                        <img src="assets/images/our-menu/01.jpg" class="img-fluid" alt="thumb" title="thumb" />
-                                                    </a>
-                                                    <div class="name">
-                                                        <h4>Food Title Here</h4>
-                                                        <p>Curses / Dictum / Risus</p>
-                                                        <div class="rating">
-                                                            <i class="icofont icofont-star"></i>
-                                                            <i class="icofont icofont-star"></i>
-                                                            <i class="icofont icofont-star"></i>
-                                                            <i class="icofont icofont-star"></i>
-                                                            <i class="icofont icofont-star"></i>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">$23.50</td>
-                                                <td class="text-center">
-                                                    <p class="qtypara">
-                                                        <span id="minus2" class="minus"><i class="icofont icofont-minus"></i></span>
-                                                        <input type="text" name="quantity" value="1" size="2" id="input-quantity2" class="form-control qty" />
-                                                        <span id="add2" class="add"><i class="icofont icofont-plus"></i></span>
-                                                        <input type="hidden" name="product_id" value="1" />
-                                                    </p>
-                                                </td>
-                                                <td class="text-center">$23.50</td>
-                                                <td class="text-center">
-                                                    <button type="button"><i class="icofont icofont-close-line"></i></button>
-                                                </td>
-                                            </tr>
+                                            {% endfor %}
                                             <tr>
                                                 <td colspan="5">
                                                     <h3 class="text-right">SUBTOTAL - $46.50</h3>

@@ -1,7 +1,7 @@
 from tokenize import Comment
 from django.contrib import admin
 from django.utils.html import format_html, mark_safe
-from restaurant.models import About, AllSections, ChooseUs, CommentBlog, CommentDish, Contact_Us, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Reservation, Testimonial, User, blogList, contact_Address, teamMembers
+from restaurant.models import About, AllSections, CartItem, ChooseUs, CommentBlog, CommentDish, Contact_Us, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Reservation, Testimonial, User, blogList, contact_Address, teamMembers
 
 # Register your models here.
 
@@ -202,6 +202,16 @@ class PopularAdmin(admin.ModelAdmin):
     list_display = ('id', 'dish_name', 'dish_picture', 'dish_price','details')
 
 admin.site.register(PopularDishes, PopularAdmin)
+
+
+class CartAdmin(admin.ModelAdmin):
+    list_filter = ('dish',)
+    search_fields = ('dish',)
+    list_display_links = ('dish',)
+    list_per_page = 12
+    list_display = ('id', 'dish', 'quantity')
+
+admin.site.register(CartItem, CartAdmin)
 
 # Dish Reviews Page admin here.
 class RewiewsAdmin(admin.ModelAdmin):
