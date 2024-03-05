@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 06:47 AM
+-- Generation Time: Mar 05, 2024 at 09:18 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -288,7 +288,10 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (68, '2024-03-05 05:39:31.237298', '2', 'Saturday - Sunday', 1, '[{\"added\": {}}]', 17, 1),
 (69, '2024-03-05 05:39:38.534710', '3', 'Breakfast', 1, '[{\"added\": {}}]', 17, 1),
 (70, '2024-03-05 05:39:51.957456', '4', 'Lunch', 1, '[{\"added\": {}}]', 17, 1),
-(71, '2024-03-05 05:40:10.205971', '5', 'Dinner', 1, '[{\"added\": {}}]', 17, 1);
+(71, '2024-03-05 05:40:10.205971', '5', 'Dinner', 1, '[{\"added\": {}}]', 17, 1),
+(72, '2024-03-05 05:53:32.368892', '3', 'test@gmail.com', 2, '[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Username\", \"User phone no\"]}}]', 25, 1),
+(73, '2024-03-05 08:12:27.941618', '1', '1800 000 0000,', 2, '[{\"changed\": {\"fields\": [\"Header logo\", \"Footer logo\"]}}]', 13, 1),
+(74, '2024-03-05 08:12:49.944340', '1', '1800 000 0000,', 2, '[{\"changed\": {\"fields\": [\"Footer logo\"]}}]', 13, 1);
 
 -- --------------------------------------------------------
 
@@ -379,7 +382,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (26, 'jet', '0005_alter_bookmark_id_alter_pinnedapplication_id', '2024-03-04 11:03:45.115330'),
 (27, 'sessions', '0001_initial', '2024-03-04 11:03:45.157927'),
 (28, 'jet', '0001_squashed_0004_auto_20201228_1802', '2024-03-04 11:03:45.169266'),
-(29, 'restaurant', '0002_alter_funfactor_icone', '2024-03-05 04:28:47.107076');
+(29, 'restaurant', '0002_alter_funfactor_icone', '2024-03-05 04:28:47.107076'),
+(30, 'restaurant', '0002_rename_logo_contact_address_footer_logo_and_more', '2024-03-05 08:10:10.439567');
 
 -- --------------------------------------------------------
 
@@ -398,8 +402,9 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('utvjta5csg9jdet8mpx543cwb41gngiv', '.eJxVjDkOwjAUBe_iGlnB35so6TmD9RcHB5AtxUkVcXeIlALaNzNvUwnXpaS15zlNoi7qrE6_GyE_c92BPLDem-ZWl3kivSv6oF3fmuTX9XD_Dgr28q1jlCGIiZwtgvFkLUYZGSyNxgNYJiZPKCReXHYhDxhMALIADME79f4A-3I4WQ:1rhNcq:Q2mmdL96unznqglmcZBIk95DQxf7tXwHmAx-vzGHm6Y', '2024-03-19 05:46:04.897619'),
-('wjhm4p0pwtmzl1hbfn02da0kqzzp2mj9', '.eJxVjEEKwyAQAP_iuYi6BrXH3vsGWbNrTVsUYnIK_XsRcmivM8McIuK-lbh3XuNC4iqMuPyyhPOL6xD0xPpocm51W5ckRyJP2-W9Eb9vZ_s3KNjL2KYEoGcM6Ml4pxFo0sSaAYL3oKxDQxkU-eyQnJqsRcWYLTBh0EZ8vuHZN-0:1rhMfu:M2Ub_yHIDJUqSkdve7ev_-mitEMeM8cuFggNfV1pk6Q', '2024-03-19 04:45:10.176478');
+('exxqclhm988b3wyyi3mspnwaigzea8vs', '.eJxVjMsOwiAQRf-FtSHQoci4dN9vaBhmkKqBpI-V8d-1SRe6veec-1Jj3NYybovM48TqokCdfjeK6SF1B3yP9dZ0anWdJ9K7og-66KGxPK-H-3dQ4lK-tRABossiXccegE2Crs8mZO5N8D0QkmNPYMPZpWydWDGYAnpkh-zV-wPqXje9:1rhNmO:4MEgmUpCc_nwZmxemEZNBh8_vkzljaoiC36gyUZfPhY', '2024-03-19 05:55:56.147090'),
+('goc9oxb6joaw3ksed5bmdcvv3dcswscs', '.eJxVjDkOwjAUBe_iGlnB35so6TmD9RcHB5AtxUkVcXeIlALaNzNvUwnXpaS15zlNoi7qrE6_GyE_c92BPLDem-ZWl3kivSv6oF3fmuTX9XD_Dgr28q1jlCGIiZwtgvFkLUYZGSyNxgNYJiZPKCReXHYhDxhMALIADME79f4A-3I4WQ:1rhPcr:xeZKGZvFEBTOk4GDjAbMd1gJ6rNZPVG5wsQNouRdrQw', '2024-03-19 07:54:13.021962'),
+('yg88888rvsea8i6rzst91v56z219m7uc', '.eJxVjDkOwjAUBe_iGlnB35so6TmD9RcHB5AtxUkVcXeIlALaNzNvUwnXpaS15zlNoi7qrE6_GyE_c92BPLDem-ZWl3kivSv6oF3fmuTX9XD_Dgr28q1jlCGIiZwtgvFkLUYZGSyNxgNYJiZPKCReXHYhDxhMALIADME79f4A-3I4WQ:1rhNjR:8eBsgvC5_p095VS84GjjyBznFX1x9roQyEiVz_IqDtw', '2024-03-19 05:52:53.196700');
 
 -- --------------------------------------------------------
 
@@ -589,16 +594,17 @@ CREATE TABLE `restaurant_contact_address` (
   `email` varchar(62) NOT NULL,
   `address` longtext DEFAULT NULL,
   `top_title` varchar(255) DEFAULT NULL,
-  `logo` varchar(100) DEFAULT NULL,
-  `google_map` longtext DEFAULT NULL
+  `footer_logo` varchar(100) DEFAULT NULL,
+  `google_map` longtext DEFAULT NULL,
+  `header_logo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `restaurant_contact_address`
 --
 
-INSERT INTO `restaurant_contact_address` (`id`, `primary_phone_no`, `phone_no`, `primary_email`, `email`, `address`, `top_title`, `logo`, `google_map`) VALUES
-(1, '1800 000 0000,', '+88 123 1234 1234', 'info@yourdomainname.com', 'contact@yourdomainname.com', '20, floor, Restaurant Food & Drinks, Nr, Queenslad Victoria Building, USA', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.', 'logo-white.png', 'xc');
+INSERT INTO `restaurant_contact_address` (`id`, `primary_phone_no`, `phone_no`, `primary_email`, `email`, `address`, `top_title`, `footer_logo`, `google_map`, `header_logo`) VALUES
+(1, '1800 000 0000,', '+88 123 1234 1234', 'info@yourdomainname.com', 'contact@yourdomainname.com', '20, floor, Restaurant Food & Drinks, Nr, Queenslad Victoria Building, USA', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.', 'lg.png', 'xc', 'logo-white_zskgkNT.png');
 
 -- --------------------------------------------------------
 
@@ -850,8 +856,9 @@ CREATE TABLE `restaurant_user` (
 --
 
 INSERT INTO `restaurant_user` (`id`, `password`, `last_login`, `is_superuser`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `username`, `user_phone_no`, `email`, `picture`) VALUES
-(1, 'pbkdf2_sha256$600000$F6bzDZO1qbpE8M9JEIIYJA$H5QyFiwBGjVvnTaJs371OTzehvNnMsTyuej2664E8k4=', '2024-03-05 05:46:04.891431', 1, 'Maliha', 'Rahham', 1, 1, '2024-03-04 11:06:16.000000', 'admin', '0173615262', 'th@gmail.com', 'avatar.svg'),
-(2, 'pbkdf2_sha256$600000$WHy1ioG4ZGvOIQMRgze32K$XXT6WODoqBow2z+f/9maBAZFMK8JW0GZK1WOaY2+RxE=', '2024-03-05 04:45:10.170120', 0, 'admin', 'test', 0, 1, '2024-03-04 11:08:13.000000', 'try', '0173615262', 'try@gmail.com', 'avatar.svg');
+(1, 'pbkdf2_sha256$600000$F6bzDZO1qbpE8M9JEIIYJA$H5QyFiwBGjVvnTaJs371OTzehvNnMsTyuej2664E8k4=', '2024-03-05 07:54:13.018210', 1, 'Maliha', 'Rahham', 1, 1, '2024-03-04 11:06:16.000000', 'admin', '0173615262', 'th@gmail.com', 'avatar.svg'),
+(2, 'pbkdf2_sha256$600000$WHy1ioG4ZGvOIQMRgze32K$XXT6WODoqBow2z+f/9maBAZFMK8JW0GZK1WOaY2+RxE=', '2024-03-05 04:45:10.170120', 0, 'admin', 'test', 0, 1, '2024-03-04 11:08:13.000000', 'try', '0173615262', 'try@gmail.com', 'avatar.svg'),
+(3, 'pbkdf2_sha256$600000$wpxVrxmasjpX3eMssCJzEG$N5Xslonv9xW3fx7hG4t8OcfBOPITmfVFqNRwwxs5TNY=', '2024-03-05 05:55:56.140350', 0, 'Maliha', 'Rahham', 0, 1, '2024-03-05 05:52:03.000000', 'test Khan', '0173615262', 'test@gmail.com', 'avatar.svg');
 
 -- --------------------------------------------------------
 
@@ -1213,7 +1220,7 @@ ALTER TABLE `dashboard_userdashboardmodule`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
@@ -1225,7 +1232,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `jet_bookmark`
@@ -1339,7 +1346,7 @@ ALTER TABLE `restaurant_testimonial`
 -- AUTO_INCREMENT for table `restaurant_user`
 --
 ALTER TABLE `restaurant_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `restaurant_user_groups`
