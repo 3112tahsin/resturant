@@ -54,7 +54,8 @@
                       aria-labelledby="dropdownMenuLink">
                       {% if request.user.is_authenticated %}
                       <li class="dropdown-item">
-                        <a href="{% url 'logout' %}"> Hi! {{request.user.username|title|slice:":8"|truncatechars:8}}</a>
+                        <a href="{% url 'logout' %}"> Hi! 
+                          {{request.user.username|title|slice:":12"|truncatechars:12}}</a>
                       </li>
                       {% else %}
                       <li class="dropdown-item">
