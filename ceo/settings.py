@@ -33,6 +33,10 @@ INSTALLED_APPS = [
     'restaurant'
 ]
 
+AUTH_USER_MODEL = 'restaurant.User'
+# AUTH_USER_MODEL = 'restaurant.User'
+# AUTHENTICATION_BACKENDS = ['restaurant.backends.CustomUserBackend']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,7 +87,7 @@ WSGI_APPLICATION = 'ceo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'restaurantp',
+        'NAME': 'rest',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

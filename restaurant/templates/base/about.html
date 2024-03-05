@@ -152,7 +152,7 @@
                     <div class="box">
                         <img src="{{ teamMember.picture.url }}" class="img-fluid" alt="chef" title="chef" />
                         <div class="caption text-center">
-                            <h4>{{ teamMember.name }}</h4>
+                            <h4>{{ teamMember.name|capfirst }}</h4>
                             <ul class="list-inline social">
                                 <li class="list-inline-item"><a href="{{ teamMember.facebook_link }}" target="_blank"><i class="icofont icofont-social-facebook"></i></a></li>
                                 <li class="list-inline-item"><a href="{{ teamMember.twitter_link }}" target="_blank"><i class="icofont icofont-social-twitter"></i></a></li>

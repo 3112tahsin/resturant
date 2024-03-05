@@ -43,6 +43,7 @@
                     <a href="{% url 'shopping-cart' %}"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
                   </li>
                   <li class="list-inline-item dropdown">
+                    
                     <a class="dropdown-toggle" href="#" role="button"
                       id="dropdownMenuLink"
                       data-toggle="dropdown"
@@ -51,9 +52,15 @@
                     <ul
                       class="dropdown-menu dropdown-menu-right drophover"
                       aria-labelledby="dropdownMenuLink">
+                      {% if request.user.is_authenticated %}
+                      <li class="dropdown-item">
+                        <a href="{% url 'logout' %}"> Hi! {{request.user.username|title|slice:":8"|truncatechars:8}}</a>
+                      </li>
+                      {% else %}
                       <li class="dropdown-item">
                         <a href="{% url 'login-page' %}">Login</a>
                       </li>
+                      {% endif %}
                       <li class="dropdown-item">
                         <a href="{% url 'register' %}">Register</a>
                       </li>

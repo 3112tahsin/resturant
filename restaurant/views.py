@@ -80,6 +80,7 @@ def about(request):
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
     blogObj = blogList.objects.all()
+    allSections = AllSections.objects.all().order_by('-id')[:1]
 
     aboutObj = About.objects.all().order_by('id')[:1].first()
     aboutObj2 = About.objects.all()
@@ -97,6 +98,7 @@ def about(request):
         'funFactor': funFactor,
         'chooseUs': chooseUs,
         'blogObj': blogObj,
+        'allSections': allSections,
     }
     return render(request, 'base/about.html', context)
 
@@ -467,15 +469,17 @@ def loginpage(request):
     #     #return redirect('home')
 
     if request.method == 'POST':
-        email = request.POST.get('email','' ).lower()
+        email = request.POST.get('email', '').lower() 
         password = request.POST.get('password', '')
-        user = authenticate(request, username=email, password=password)
+        user = authenticate(request, email=email, password=password)
 
         if user is not None:
             auth_login(request, user)
             return redirect('home')
         else:
-            return render(request, 'base/login-page.html', {'error_message': 'Invalid login credentials. Please try again '})
+            error_message = 'Invalid login credentials. Please try again.'
+            return render(request, 'base/login-page.html', {'error_message': error_message})
+
     
 
     

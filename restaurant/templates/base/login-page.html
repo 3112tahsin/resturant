@@ -52,7 +52,7 @@
                                 <h5>Login</h5>
                                 <p>Don't have an account? So <a href="{% url 'register' %}">Register</a> And starts less than a minute</p>
                                 <form method="post" enctype="multipart/form-data">
-                                  {% csrf_token %}
+                                    {% csrf_token %}
                                     <div class="form-group">
                                         <i class="icofont icofont-ui-message"></i><input type="text" name="email" value="" placeholder="EMAIL" id="email" class="form-control" />
                                     </div>

@@ -126,7 +126,7 @@ class About(models.Model):
 class FunFactor(models.Model):
     title = models.CharField(null=True, max_length=30)
     values = models.CharField(null=True, max_length=15)
-    icone = models.CharField(null=True,max_length=15)
+    icone = models.CharField(null=True,max_length=63)
    
     def __str__(self):
         return self.title
