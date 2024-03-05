@@ -53,9 +53,10 @@
                       class="dropdown-menu dropdown-menu-right drophover"
                       aria-labelledby="dropdownMenuLink">
                       {% if request.user.is_authenticated %}
-                      <li class="dropdown-item">
+                      <li class="dropdown-item log">
                         <a href="{% url 'logout' %}"> Hi! 
                           {{request.user.username|title|slice:":12"|truncatechars:12}}</a>
+                          <span class="text">Logout</span>
                       </li>
                       {% else %}
                       <li class="dropdown-item">
@@ -111,12 +112,14 @@
               <!-- Logo Start  -->
   
               <div id="logo">
-                <a href="index.html"><img
+                {% for contactAddresses in contactAddresses %}
+                <a href="{% url 'home' %}"><img
                     id="logo_img"
                     class="img-fluid"
-                    src="{% static 'assets/images/logo/logo-white.png' %}"
+                    src="{{ contactAddresses.header_logo.url }}"
                     alt="logo"
                     title="logo"/></a>
+                {% endfor %}
               </div>
               <!-- Logo End  -->
             </div>

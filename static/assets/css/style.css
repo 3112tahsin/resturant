@@ -5330,3 +5330,23 @@ footer .powered .social li a:hover i {
     }
 
 }
+
+li.dropdown-item.log:hover .text {
+    display: block;
+    position: absolute
+}
+
+.text {
+    padding: 5px;
+    position: relative;
+    left: 13px;
+    top: -30px;
+    text-align: center;
+    background: rgb(0, 174, 239);
+    width: 100px;
+    height: 25px;
+    color: #fff;
+    font-size: 14px;
+    display: none;
+    border-radius: 2px;
+}

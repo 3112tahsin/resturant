@@ -52,13 +52,13 @@ jQuery(document).ready(function($) {
             $('.style-customizer .styleChange li[data-style="'+tp_stylesheet+'"]').addClass("selected");			 	
         };
     };	
-    $("body").addClass(header); 
-    $('.style-customizer .headerChange li[data-style="'+header+'"]').addClass("selected");
-    if ($("body").hasClass("header-0")){
-        document.getElementById("logo_img").src="assets/images/logo/logo.png";
-    } else {
-        document.getElementById("logo_img").src="assets/images/logo/logo-white.png";
-    }
+    // $("body").addClass(header); 
+    // $('.style-customizer .headerChange li[data-style="'+header+'"]').addClass("selected");
+    // if ($("body").hasClass("header-0")){
+    //     document.getElementById("logo_img").src="assets/images/logo/logo.png";
+    // } else {
+    //     document.getElementById("logo_img").src="assets/images/logo/logo-white.png";
+    // }
     
     if (!($.cookie('layout_mode'))) {
         $.cookie('layout_mode', 'wide-layout', 30);
@@ -117,23 +117,23 @@ jQuery(document).ready(function($) {
     
     
     /* Header Changer  */
-    $('.style-customizer .headerChange li').on('click',function(){
-        var $this = $(this),
-        header = $this.data('style');
-        $(".style-customizer .headerChange .selected").removeClass("selected");
-        $this.addClass("selected");
-        $("body").removeClass("header-0 header-1 header-2");
-        $("body").addClass(header);
-        $.cookie('header', header, 30);
+    // $('.style-customizer .headerChange li').on('click',function(){
+    //     var $this = $(this),
+    //     header = $this.data('style');
+    //     $(".style-customizer .headerChange .selected").removeClass("selected");
+    //     $this.addClass("selected");
+    //     $("body").removeClass("header-0 header-1 header-2");
+    //     $("body").addClass(header);
+    //     $.cookie('header', header, 30);
 
-        if ($("body").hasClass("header-0")){
-                document.getElementById("logo_img").src="assets/images/logo/logo.png";
-        } else {
-            document.getElementById("logo_img").src="assets/images/logo/logo-white.png";
-        }
+    //     if ($("body").hasClass("header-0")){
+    //             document.getElementById("logo_img").src="assets/images/logo/logo.png";
+    //     } else {
+    //         document.getElementById("logo_img").src="assets/images/logo/logo-white.png";
+    //     }
 
 
-    });
+    // });
 
 
     /* layout Change  */

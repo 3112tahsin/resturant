@@ -14,18 +14,9 @@ admin.site.register(User, UserAdmin)
 class AddressAdmin(admin.ModelAdmin):
     list_filter = ('primary_phone_no',)
     search_fields = ('primary_phone_no',)
-    list_display = ('primary_phone_no', 'primary_email', 'address', 'display_logo')
+    list_display = ('primary_phone_no', 'primary_email', 'address', 'header_logo', 'footer_logo')
 
-    def display_logo(self, obj):
-        # Check if the logo exists
-        if obj.logo:
-            return format_html('<img src="{}" style="max-height: 50px; max-width: 100px;" />', obj.logo.url)
-        else:
-            return 'No logo'
-
-    display_logo.allow_tags = True
-    display_logo.short_description = 'Logo'
-
+    
 admin.site.register(contact_Address, AddressAdmin)
 
 # Contuct Us admin here.

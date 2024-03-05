@@ -62,7 +62,8 @@ class contact_Address(models.Model):
     email = models.EmailField(max_length=62, blank=True)
     address = models.TextField(null=True)
     top_title = models.CharField(max_length=255, null=True)
-    logo = models.ImageField(null=True, default="avatar.svg")
+    header_logo = models.ImageField(null=True, default="avatar.svg")
+    footer_logo = models.ImageField(null=True, default="avatar.svg")
     google_map = models.TextField(max_length=500, null=True)
     
     def __str__(self):
