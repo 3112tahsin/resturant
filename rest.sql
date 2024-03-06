@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 09:18 AM
+-- Generation Time: Mar 06, 2024 at 07:46 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -161,7 +161,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (97, 'Can add user', 25, 'add_user'),
 (98, 'Can change user', 25, 'change_user'),
 (99, 'Can delete user', 25, 'delete_user'),
-(100, 'Can view user', 25, 'view_user');
+(100, 'Can view user', 25, 'view_user'),
+(101, 'Can add cart item', 26, 'add_cartitem'),
+(102, 'Can change cart item', 26, 'change_cartitem'),
+(103, 'Can delete cart item', 26, 'delete_cartitem'),
+(104, 'Can view cart item', 26, 'view_cartitem');
 
 -- --------------------------------------------------------
 
@@ -191,7 +195,6 @@ INSERT INTO `dashboard_userdashboardmodule` (`id`, `title`, `module`, `app_label
 (2, 'Applications', 'jet.dashboard.modules.AppList', NULL, 1, 1, 0, '{\"models\": null, \"exclude\": [\"auth.*\"]}', '', 0),
 (3, 'Administration', 'jet.dashboard.modules.AppList', NULL, 1, 2, 0, '{\"models\": [\"auth.*\"], \"exclude\": null}', '', 0),
 (4, 'Recent Actions', 'jet.dashboard.modules.RecentActions', NULL, 1, 0, 1, '{\"limit\": 10, \"include_list\": null, \"exclude_list\": null, \"user\": null}', '', 0),
-(5, 'Latest Django News', 'jet.dashboard.modules.Feed', NULL, 1, 1, 1, '{\"feed_url\": \"http://www.djangoproject.com/rss/weblog/\", \"limit\": 5}', '', 0),
 (6, 'Support', 'jet.dashboard.modules.LinkList', NULL, 1, 2, 1, '{\"draggable\": true, \"deletable\": true, \"collapsible\": true, \"layout\": \"stacked\"}', '[{\"title\": \"Django documentation\", \"url\": \"http://docs.djangoproject.com/\", \"external\": true}, {\"title\": \"Django \\\"django-users\\\" mailing list\", \"url\": \"http://groups.google.com/group/django-users\", \"external\": true}, {\"title\": \"Django irc channel\", \"url\": \"irc://irc.freenode.net/django\", \"external\": true}]', 0),
 (7, 'Application models', 'jet.dashboard.modules.ModelList', 'restaurant', 1, 0, 0, '{\"models\": [\"restaurant.*\"], \"exclude\": null}', '', 0),
 (8, 'Recent Actions', 'jet.dashboard.modules.RecentActions', 'restaurant', 1, 1, 0, '{\"limit\": 10, \"include_list\": [\"restaurant.*\"], \"exclude_list\": null, \"user\": null}', '', 0);
@@ -291,7 +294,23 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (71, '2024-03-05 05:40:10.205971', '5', 'Dinner', 1, '[{\"added\": {}}]', 17, 1),
 (72, '2024-03-05 05:53:32.368892', '3', 'test@gmail.com', 2, '[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Username\", \"User phone no\"]}}]', 25, 1),
 (73, '2024-03-05 08:12:27.941618', '1', '1800 000 0000,', 2, '[{\"changed\": {\"fields\": [\"Header logo\", \"Footer logo\"]}}]', 13, 1),
-(74, '2024-03-05 08:12:49.944340', '1', '1800 000 0000,', 2, '[{\"changed\": {\"fields\": [\"Footer logo\"]}}]', 13, 1);
+(74, '2024-03-05 08:12:49.944340', '1', '1800 000 0000,', 2, '[{\"changed\": {\"fields\": [\"Footer logo\"]}}]', 13, 1),
+(75, '2024-03-05 09:47:58.269503', '1', '2 x Dish Name Here2', 1, '[{\"added\": {}}]', 26, 1),
+(76, '2024-03-05 10:24:14.159050', '1', '1 x Dish Name Here2', 2, '[{\"changed\": {\"fields\": [\"Quantity\"]}}]', 26, 1),
+(77, '2024-03-05 10:39:18.822428', '1', '2 x Dish Name Here2', 2, '[{\"changed\": {\"fields\": [\"Quantity\"]}}]', 26, 1),
+(78, '2024-03-05 10:39:26.911290', '1', '1 x Dish Name Here2', 2, '[{\"changed\": {\"fields\": [\"Quantity\"]}}]', 26, 1),
+(79, '2024-03-06 04:50:43.226253', '2', 'try@gmail.com', 2, '[{\"changed\": {\"fields\": [\"Staff status\"]}}]', 25, 1),
+(80, '2024-03-06 05:35:04.621522', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.', 2, '[]', 10, 1),
+(81, '2024-03-06 05:36:19.101532', '1', 'md sabbir ahmed', 2, '[{\"changed\": {\"fields\": [\"Is read\"]}}]', 18, 1),
+(82, '2024-03-06 05:39:45.191956', '1', '1800 000 0000,', 2, '[]', 13, 1),
+(83, '2024-03-06 05:42:55.032951', '3', 'Blog Title Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 2, '[]', 11, 1),
+(84, '2024-03-06 05:46:14.050545', '5', 'Dish Name Here2', 2, '[]', 21, 1),
+(85, '2024-03-06 05:47:20.557853', '1', 'Food & Drinkes', 2, '[]', 9, 1),
+(86, '2024-03-06 05:49:06.500487', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.', 2, '[]', 12, 1),
+(87, '2024-03-06 05:49:35.595288', '4', 'tahsin', 2, '[]', 19, 1),
+(88, '2024-03-06 05:51:02.550982', '21', 'Dish Name Here', 1, '[{\"added\": {}}]', 22, 1),
+(89, '2024-03-06 06:09:18.182716', '21', 'Dish Name Here', 2, '[]', 22, 1),
+(90, '2024-03-06 06:28:56.557968', '2', 'Blog Title Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 2, '[{\"changed\": {\"fields\": [\"Buttom details\"]}}]', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -320,6 +339,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (9, 'restaurant', 'about'),
 (10, 'restaurant', 'allsections'),
 (11, 'restaurant', 'bloglist'),
+(26, 'restaurant', 'cartitem'),
 (12, 'restaurant', 'chooseus'),
 (24, 'restaurant', 'commentblog'),
 (23, 'restaurant', 'commentdish'),
@@ -383,7 +403,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (27, 'sessions', '0001_initial', '2024-03-04 11:03:45.157927'),
 (28, 'jet', '0001_squashed_0004_auto_20201228_1802', '2024-03-04 11:03:45.169266'),
 (29, 'restaurant', '0002_alter_funfactor_icone', '2024-03-05 04:28:47.107076'),
-(30, 'restaurant', '0002_rename_logo_contact_address_footer_logo_and_more', '2024-03-05 08:10:10.439567');
+(30, 'restaurant', '0002_rename_logo_contact_address_footer_logo_and_more', '2024-03-05 08:10:10.439567'),
+(31, 'restaurant', '0002_cartitem', '2024-03-05 09:40:55.490628'),
+(32, 'restaurant', '0003_rename_top_image_bloglist_main_image_and_more', '2024-03-06 06:23:50.455410');
 
 -- --------------------------------------------------------
 
@@ -402,6 +424,7 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('4fc4yepas599otp2thhqtvwrd2yuyiel', '.eJxVjDkOwjAUBe_iGlnB35so6TmD9RcHB5AtxUkVcXeIlALaNzNvUwnXpaS15zlNoi7qrE6_GyE_c92BPLDem-ZWl3kivSv6oF3fmuTX9XD_Dgr28q1jlCGIiZwtgvFkLUYZGSyNxgNYJiZPKCReXHYhDxhMALIADME79f4A-3I4WQ:1rhjoi:snV5teMCsWvKcoD0ogoIeJmxXdgn7Sx8axDq2FjK_I0', '2024-03-20 05:27:48.115822'),
 ('exxqclhm988b3wyyi3mspnwaigzea8vs', '.eJxVjMsOwiAQRf-FtSHQoci4dN9vaBhmkKqBpI-V8d-1SRe6veec-1Jj3NYybovM48TqokCdfjeK6SF1B3yP9dZ0anWdJ9K7og-66KGxPK-H-3dQ4lK-tRABossiXccegE2Crs8mZO5N8D0QkmNPYMPZpWydWDGYAnpkh-zV-wPqXje9:1rhNmO:4MEgmUpCc_nwZmxemEZNBh8_vkzljaoiC36gyUZfPhY', '2024-03-19 05:55:56.147090'),
 ('goc9oxb6joaw3ksed5bmdcvv3dcswscs', '.eJxVjDkOwjAUBe_iGlnB35so6TmD9RcHB5AtxUkVcXeIlALaNzNvUwnXpaS15zlNoi7qrE6_GyE_c92BPLDem-ZWl3kivSv6oF3fmuTX9XD_Dgr28q1jlCGIiZwtgvFkLUYZGSyNxgNYJiZPKCReXHYhDxhMALIADME79f4A-3I4WQ:1rhPcr:xeZKGZvFEBTOk4GDjAbMd1gJ6rNZPVG5wsQNouRdrQw', '2024-03-19 07:54:13.021962'),
 ('yg88888rvsea8i6rzst91v56z219m7uc', '.eJxVjDkOwjAUBe_iGlnB35so6TmD9RcHB5AtxUkVcXeIlALaNzNvUwnXpaS15zlNoi7qrE6_GyE_c92BPLDem-ZWl3kivSv6oF3fmuTX9XD_Dgr28q1jlCGIiZwtgvFkLUYZGSyNxgNYJiZPKCReXHYhDxhMALIADME79f4A-3I4WQ:1rhNjR:8eBsgvC5_p095VS84GjjyBznFX1x9roQyEiVz_IqDtw', '2024-03-19 05:52:53.196700');
@@ -493,7 +516,7 @@ CREATE TABLE `restaurant_bloglist` (
   `blog_image` varchar(100) DEFAULT NULL,
   `date` date NOT NULL,
   `home_image` varchar(100) DEFAULT NULL,
-  `top_image` varchar(100) DEFAULT NULL,
+  `main_image` varchar(100) DEFAULT NULL,
   `top_details` longtext DEFAULT NULL,
   `details2` longtext DEFAULT NULL,
   `banner_details` longtext DEFAULT NULL,
@@ -504,10 +527,29 @@ CREATE TABLE `restaurant_bloglist` (
 -- Dumping data for table `restaurant_bloglist`
 --
 
-INSERT INTO `restaurant_bloglist` (`id`, `blog_title`, `blog_image`, `date`, `home_image`, `top_image`, `top_details`, `details2`, `banner_details`, `buttom_details`) VALUES
+INSERT INTO `restaurant_bloglist` (`id`, `blog_title`, `blog_image`, `date`, `home_image`, `main_image`, `top_details`, `details2`, `banner_details`, `buttom_details`) VALUES
 (1, 'Blog Title Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img5.jpg', '2024-03-05', 'b1.jpg', 'big.jpg', 'The error you\'re encountering indicates that there\'s a foreign key constraint failure when trying to add or update a row in the dashboard_userdashboardmodule table. This issue typically arises when the user_id column in the dashboard_userdashboardmodule table is referencing the id column in the auth_user table, but there\'s a mismatch or inconsistency in the data.', 'The error you\'re encountering indicates that there\'s a foreign key constraint failure when trying to add or update a row in the dashboard_userdashboardmodule table. This issue typically arises when the user_id column in the dashboard_userdashboardmodule table is referencing the id column in the auth_user table, but there\'s a mismatch or inconsistency in the data.', 'The error you\'re encountering indicates that there\'s a foreign key constraint failure when trying to add or update a row in the dashboard_userdashboardmodule table. This issue typically arises when the user_id column in the dashboard_userdashboardmodule table is referencing the id column in the auth_user table, but there\'s a mismatch or inconsistency in the data.', 'The error you\'re encountering indicates that there\'s a foreign key constraint failure when trying to add or update a row in the dashboard_userdashboardmodule table. This issue typically arises when the user_id column in the dashboard_userdashboardmodule table is referencing the id column in the auth_user table, but there\'s a mismatch or inconsistency in the data.'),
-(2, 'Blog Title Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img4.jpg', '2024-03-06', 'b2.jpg', 'big_ZDWaPZr.jpg', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.'),
+(2, 'Blog Title Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img4.jpg', '2024-03-06', 'b2.jpg', 'big_ZDWaPZr.jpg', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.'),
 (3, 'Blog Title Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img2.jpg', '2024-03-06', 'b2_bjmszaG.jpg', 'big_jB1DBcz.jpg', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', 'Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin. Duis eu tristique elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant_cartitem`
+--
+
+CREATE TABLE `restaurant_cartitem` (
+  `id` bigint(20) NOT NULL,
+  `quantity` int(10) UNSIGNED NOT NULL CHECK (`quantity` >= 0),
+  `dish_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `restaurant_cartitem`
+--
+
+INSERT INTO `restaurant_cartitem` (`id`, `quantity`, `dish_id`) VALUES
+(1, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -555,7 +597,9 @@ CREATE TABLE `restaurant_commentblog` (
 
 INSERT INTO `restaurant_commentblog` (`id`, `name`, `email`, `body`, `created`, `active`, `blog_name_id`) VALUES
 (1, 'tahsin', 'tahsinhossen3@gmail.com', 'The error you\'re encountering indicates that there\'s a foreign key constraint failure when trying to add or update a row in the dashboard_userdashboardmodule table.', '2024-03-04 11:35:26.107831', 1, 1),
-(2, 'Test', 'test@gmail.com', 'The error you\'re encountering indicates that there\'s a foreign key constraint failure when trying to add or update a row in the dashboard_userdashboardmodule table.', '2024-03-05 05:44:22.747091', 1, 1);
+(2, 'Test', 'test@gmail.com', 'The error you\'re encountering indicates that there\'s a foreign key constraint failure when trying to add or update a row in the dashboard_userdashboardmodule table.', '2024-03-05 05:44:22.747091', 1, 1),
+(3, 'tahsin', 'tahsinhossen3@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', '2024-03-06 05:43:24.178515', 1, 3),
+(4, 'md sabbir ahmed', 'test@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci tellus, fermentum nec imperdiet sed, pulvinar et sem, Fusce hendrerit faucibus sollicitudin.', '2024-03-06 05:43:47.910949', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -578,7 +622,8 @@ CREATE TABLE `restaurant_commentdish` (
 --
 
 INSERT INTO `restaurant_commentdish` (`id`, `name`, `email`, `body`, `created`, `active`, `dish_name_id`) VALUES
-(1, 'Test', 'test@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.', '2024-03-05 05:43:51.066121', 1, 5);
+(1, 'Test', 'test@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.', '2024-03-05 05:43:51.066121', 1, 5),
+(2, 'tahsin', 'tahsinhossen3@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.', '2024-03-06 05:46:32.893434', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -662,7 +707,8 @@ INSERT INTO `restaurant_dishesmenu` (`id`, `dish_name`, `dish_title`, `dish_pict
 (17, 'Dish Name Here2', 'Cursus / Dictum / Risus', '08_J5ZxQSt.jpg', '100', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.', 5),
 (18, 'Dish Name Here', 'Cursus / Dictum / Risus....', '07.jpg', '100', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.', 5),
 (19, 'Dish Name Here3', 'Cursus / Dictum / Risus', '04_UG7A73w.jpg', '100', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.', 6),
-(20, 'Dish Name Here3', 'Cursus / Dictum / Risus....', '07_1_UsMu83X.jpg', '100', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.', 6);
+(20, 'Dish Name Here3', 'Cursus / Dictum / Risus....', '07_1_UsMu83X.jpg', '100', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.', 6),
+(21, 'Dish Name Here', 'Cursus / Dictum / Risus', '03_VTxesWS.jpg', '111', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla.', 6);
 
 -- --------------------------------------------------------
 
@@ -782,6 +828,13 @@ CREATE TABLE `restaurant_reservation` (
   `is_read` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `restaurant_reservation`
+--
+
+INSERT INTO `restaurant_reservation` (`id`, `name`, `email`, `phone`, `reservation_date`, `reservation_time`, `total_person`, `date_time`, `is_read`) VALUES
+(1, 'md sabbir ahmed', 'md.sabbir073@gmail.com', '01643059745', '2024-02-02', '06:40:00.000000', '4', '2024-03-06 05:35:51.000000', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -856,9 +909,10 @@ CREATE TABLE `restaurant_user` (
 --
 
 INSERT INTO `restaurant_user` (`id`, `password`, `last_login`, `is_superuser`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `username`, `user_phone_no`, `email`, `picture`) VALUES
-(1, 'pbkdf2_sha256$600000$F6bzDZO1qbpE8M9JEIIYJA$H5QyFiwBGjVvnTaJs371OTzehvNnMsTyuej2664E8k4=', '2024-03-05 07:54:13.018210', 1, 'Maliha', 'Rahham', 1, 1, '2024-03-04 11:06:16.000000', 'admin', '0173615262', 'th@gmail.com', 'avatar.svg'),
-(2, 'pbkdf2_sha256$600000$WHy1ioG4ZGvOIQMRgze32K$XXT6WODoqBow2z+f/9maBAZFMK8JW0GZK1WOaY2+RxE=', '2024-03-05 04:45:10.170120', 0, 'admin', 'test', 0, 1, '2024-03-04 11:08:13.000000', 'try', '0173615262', 'try@gmail.com', 'avatar.svg'),
-(3, 'pbkdf2_sha256$600000$wpxVrxmasjpX3eMssCJzEG$N5Xslonv9xW3fx7hG4t8OcfBOPITmfVFqNRwwxs5TNY=', '2024-03-05 05:55:56.140350', 0, 'Maliha', 'Rahham', 0, 1, '2024-03-05 05:52:03.000000', 'test Khan', '0173615262', 'test@gmail.com', 'avatar.svg');
+(1, 'pbkdf2_sha256$600000$F6bzDZO1qbpE8M9JEIIYJA$H5QyFiwBGjVvnTaJs371OTzehvNnMsTyuej2664E8k4=', '2024-03-06 05:27:48.105647', 1, 'Maliha', 'Rahham', 1, 1, '2024-03-04 11:06:16.000000', 'admin', '0173615262', 'th@gmail.com', 'avatar.svg'),
+(2, 'pbkdf2_sha256$600000$WHy1ioG4ZGvOIQMRgze32K$XXT6WODoqBow2z+f/9maBAZFMK8JW0GZK1WOaY2+RxE=', '2024-03-05 04:45:10.000000', 0, 'admin', 'test', 1, 1, '2024-03-04 11:08:13.000000', 'try', '0173615262', 'try@gmail.com', 'avatar.svg'),
+(3, 'pbkdf2_sha256$600000$wpxVrxmasjpX3eMssCJzEG$N5Xslonv9xW3fx7hG4t8OcfBOPITmfVFqNRwwxs5TNY=', '2024-03-05 05:55:56.140350', 0, 'Maliha', 'Rahham', 0, 1, '2024-03-05 05:52:03.000000', 'test Khan', '0173615262', 'test@gmail.com', 'avatar.svg'),
+(4, 'pbkdf2_sha256$600000$QqPuSNdFCUrIUurkJGBMZD$nxjS4v5cdkp58U21ekNkwWVO/tmRtDG93AUHaXooFwg=', '2024-03-06 05:26:00.518421', 0, '', '', 0, 1, '2024-03-06 05:25:20.014578', 'test1', '', 'test1@gmail.com', 'avatar.svg');
 
 -- --------------------------------------------------------
 
@@ -1084,6 +1138,13 @@ ALTER TABLE `restaurant_bloglist`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `restaurant_cartitem`
+--
+ALTER TABLE `restaurant_cartitem`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_cartitem_dish_id_2f528be4_fk_restauran` (`dish_id`);
+
+--
 -- Indexes for table `restaurant_chooseus`
 --
 ALTER TABLE `restaurant_chooseus`
@@ -1208,7 +1269,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `dashboard_userdashboardmodule`
@@ -1220,19 +1281,19 @@ ALTER TABLE `dashboard_userdashboardmodule`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `jet_bookmark`
@@ -1265,6 +1326,12 @@ ALTER TABLE `restaurant_bloglist`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `restaurant_cartitem`
+--
+ALTER TABLE `restaurant_cartitem`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `restaurant_chooseus`
 --
 ALTER TABLE `restaurant_chooseus`
@@ -1274,13 +1341,13 @@ ALTER TABLE `restaurant_chooseus`
 -- AUTO_INCREMENT for table `restaurant_commentblog`
 --
 ALTER TABLE `restaurant_commentblog`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `restaurant_commentdish`
 --
 ALTER TABLE `restaurant_commentdish`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `restaurant_contact_address`
@@ -1298,7 +1365,7 @@ ALTER TABLE `restaurant_contact_us`
 -- AUTO_INCREMENT for table `restaurant_dishesmenu`
 --
 ALTER TABLE `restaurant_dishesmenu`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `restaurant_funfactor`
@@ -1328,7 +1395,7 @@ ALTER TABLE `restaurant_populardishes`
 -- AUTO_INCREMENT for table `restaurant_reservation`
 --
 ALTER TABLE `restaurant_reservation`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `restaurant_teammembers`
@@ -1346,7 +1413,7 @@ ALTER TABLE `restaurant_testimonial`
 -- AUTO_INCREMENT for table `restaurant_user`
 --
 ALTER TABLE `restaurant_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `restaurant_user_groups`
@@ -1401,6 +1468,12 @@ ALTER TABLE `jet_bookmark`
 --
 ALTER TABLE `jet_pinnedapplication`
   ADD CONSTRAINT `jet_pinnedapplication_user_id_7765bcf9_fk_restaurant_user_id` FOREIGN KEY (`user_id`) REFERENCES `restaurant_user` (`id`);
+
+--
+-- Constraints for table `restaurant_cartitem`
+--
+ALTER TABLE `restaurant_cartitem`
+  ADD CONSTRAINT `restaurant_cartitem_dish_id_2f528be4_fk_restauran` FOREIGN KEY (`dish_id`) REFERENCES `restaurant_populardishes` (`id`);
 
 --
 -- Constraints for table `restaurant_commentblog`

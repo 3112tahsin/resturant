@@ -172,9 +172,9 @@ class teamMembers(models.Model):
 class blogList(models.Model):
     blog_title = models.CharField(null=True, max_length=127)
     blog_image = models.ImageField(null=True, default="avatar.svg")
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     home_image = models.ImageField(null=True, default="avatar.svg")
-    top_image = models.ImageField(null=True, default="avatar.svg")
+    main_image = models.ImageField(null=True, default="avatar.svg")
     top_details = models.TextField(null=True)
     details2 = models.TextField(null=True)
     banner_details = models.TextField(null=True)

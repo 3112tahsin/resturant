@@ -14,9 +14,22 @@ admin.site.register(User, UserAdmin)
 class AddressAdmin(admin.ModelAdmin):
     list_filter = ('primary_phone_no',)
     search_fields = ('primary_phone_no',)
-    list_display = ('primary_phone_no', 'primary_email', 'address', 'header_logo', 'footer_logo')
+    list_display = ('primary_phone_no', 'primary_email', 'address', 'display_header_logo', 'display_footer_logo')
 
-    
+    def display_header_logo(self, obj):
+        if obj.header_logo:
+            return format_html('<img src="{}" width="100" />', obj.header_logo.url)
+        else:
+            return 'No Image'
+    display_header_logo.short_description = 'Header Logo'
+
+    def display_footer_logo(self, obj):
+        if obj.footer_logo:
+            return format_html('<img src="{}" width="100" />', obj.footer_logo.url)
+        else:
+            return 'No Image'
+    display_footer_logo.short_description = 'Footer Logo'
+
 admin.site.register(contact_Address, AddressAdmin)
 
 # Contuct Us admin here.
@@ -73,7 +86,14 @@ class AboutAdmin(admin.ModelAdmin):
     list_filter = ('title',)
     search_fields = ('title',)
     list_display_links = ('title',)
-    list_display = ('id', 'title', 'detailes', 'full_detailes', 'slider_image')
+    list_display = ('id', 'title', 'detailes', 'full_detailes', 'display_slider_image')
+
+    def display_slider_image(self, obj):
+        if obj.slider_image:
+            return format_html('<img src="{}" width="50" />', obj.slider_image.url)
+        else:
+            return 'No Image'
+    display_slider_image.short_description = 'Slider Image'
 
 admin.site.register(About, AboutAdmin)
 
@@ -91,16 +111,30 @@ class ChooseUsAdmin(admin.ModelAdmin):
     list_filter = ('chooseUs_title',)
     search_fields = ('chooseUs_title',)
     list_display_links = ('chooseUs_title',)
-    list_display = ('chooseUs_title', 'choose_image', 'chef_title', 'total_tables','tables_detailes','our_chefs_title')
+    list_display = ('chooseUs_title', 'display_choose_image', 'chef_title', 'total_tables', 'tables_detailes', 'our_chefs_title')
+
+    def display_choose_image(self, obj):
+        if obj.choose_image:
+            return format_html('<img src="{}" width="150" height="100" />', obj.choose_image.url)
+        else:
+            return 'No Image'
+    display_choose_image.short_description = 'Choose Image'
 
 admin.site.register(ChooseUs, ChooseUsAdmin)
 
-# Team Members Page admin here.
 class TeamAdmin(admin.ModelAdmin):
     list_filter = ('name',)
     search_fields = ('name',)
     list_display_links = ('name',)
-    list_display = ('id', 'name', 'picture', 'sort_details')
+    list_per_page = 10
+    list_display = ('id', 'name', 'display_picture', 'sort_details')
+
+    def display_picture(self, obj):
+        if obj.picture:
+            return format_html('<img src="{}" width="50" />', obj.picture.url)
+        else:
+            return 'No Image'
+    display_picture.short_description = 'Picture'
 
 admin.site.register(teamMembers, TeamAdmin)
 
@@ -111,7 +145,7 @@ class blogAdmin(admin.ModelAdmin):
     search_fields = ('blog_title',)
     list_per_page = 5
     list_display_links = ('blog_title',)
-    list_display = ('id', 'blog_title', 'display_blog_image', 'date', 'top_details', 'display_home_image', 'display_top_image', 'banner_details')
+    list_display = ('id', 'blog_title', 'display_blog_image', 'date', 'top_details', 'display_home_image', 'display_main_image', 'banner_details')
 
     def display_blog_image(self, obj):
         if obj.blog_image:
@@ -127,12 +161,12 @@ class blogAdmin(admin.ModelAdmin):
             return 'No Image'
     display_home_image.short_description = 'Home Image'
 
-    def display_top_image(self, obj):
-        if obj.top_image:
-            return format_html('<img src="{}" width="50" />', obj.top_image.url)
+    def display_main_image(self, obj):
+        if obj.main_image:
+            return format_html('<img src="{}" width="50" />', obj.main_image.url)
         else:
             return 'No Image'
-    display_top_image.short_description = 'Top Image'
+    display_main_image.short_description = 'Main Image'
 
 admin.site.register(blogList, blogAdmin)
 
@@ -199,7 +233,14 @@ class PopularAdmin(admin.ModelAdmin):
     search_fields = ('dish_name',)
     list_display_links = ('dish_name',)
     list_per_page = 12
-    list_display = ('id', 'dish_name', 'dish_picture', 'dish_price','details')
+    list_display = ('id', 'dish_name', 'display_dish_picture', 'dish_price', 'details')
+
+    def display_dish_picture(self, obj):
+        if obj.dish_picture:
+            return format_html('<img src="{}" width="50" />', obj.dish_picture.url)
+        else:
+            return 'No Image'
+    display_dish_picture.short_description = 'Dish Picture'
 
 admin.site.register(PopularDishes, PopularAdmin)
 
@@ -231,13 +272,20 @@ class MenucasAdmin(admin.ModelAdmin):
 
 admin.site.register(MenuCategory, MenucasAdmin)
 
-
+# Dish Mnue Page admin here.
 class MenuAdmin(admin.ModelAdmin):
-    list_filter = ('dish_name','category_name','dish_price')
+    list_filter = ('dish_name', 'category_name', 'dish_price')
     search_fields = ('dish_name',)
     list_display_links = ('dish_name',)
     list_per_page = 12
-    list_display = ('id', 'category_name', 'dish_name', 'dish_picture', 'dish_price','details')
+    list_display = ('id', 'category_name', 'dish_name', 'display_dish_picture', 'dish_price', 'details')
+
+    def display_dish_picture(self, obj):
+        if obj.dish_picture:
+            return format_html('<img src="{}" width="50" />', obj.dish_picture.url)
+        else:
+            return 'No Image'
+    display_dish_picture.short_description = 'Dish Picture'
 
 admin.site.register(DishesMenu, MenuAdmin)
 
