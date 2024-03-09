@@ -350,6 +350,7 @@ def menu(request):
     }
     return render(request, 'base/menu.html', context)
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Shop page views here.
 def shop(request):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
@@ -368,6 +369,18 @@ def shop(request):
             Q(dish_price=query) | 
             Q(details__icontains=query)
             )
+        
+
+    paginator = Paginator(popularDishes, 3)  # 3 items per page
+    page_number = request.GET.get('page')
+    try:
+        popular_dishes = paginator.page(page_number)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        popular_dishes = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        popular_dishes = paginator.page(paginator.num_pages)
 
 
     context = {
@@ -378,6 +391,7 @@ def shop(request):
         'popularDishes': popularDishes,
         'MenucAT': MenucAT,
         'allSections': allSections,
+        'popular_dishes': popular_dishes,
     }
     return render(request, 'base/shop.html', context)
 
@@ -422,6 +436,15 @@ def shopdetails(request , shop_id):
     else:
         form = ReviewsForm()
 
+    #Related Dishes Views
+    current_dish = get_object_or_404(PopularDishes, id=shop_id)
+    related_dishes = PopularDishes.objects.filter(
+        Q(category_name=current_dish.category_name) |  # Filter 
+        Q(dish_name=current_dish.dish_name) |  
+        Q(dish_price__icontains=current_dish.dish_price) |  
+        Q(details__icontains=current_dish.details)      # Filter by similar details
+    ).exclude(id=current_dish.id).order_by('-id')[:6]   
+
     context = {
         'contactAddresses': contactAddresses,
         'testMonial': testMonial,
@@ -434,27 +457,43 @@ def shopdetails(request , shop_id):
         'sHop': sHop,
         'reViews': reViews,
         'form': form,
+        'related_dishes': related_dishes,
     }
     return render(request, 'base/shop-details.html', context)
 
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='/login-page')
 # Shopping-cart page views here.
 def shoppingcart(request, dish_id=None):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
     blogObj = blogList.objects.all()
-    cart_items = CartItem.objects.all()
+    cart_items = CartItem.objects.filter(username=request.user)
+    
 
     for cart_item in cart_items:
-        cart_item.item_total = cart_item.quantity * cart_item.dish.dish_price
+        cart_item.item_total = cart_item.quantity * float(cart_item.dish.dish_price)
+
+    subtotal = sum(cart_item.item_total for cart_item in cart_items)
 
 
-    if dish_id is not None:  # Check if dish_id is provided
-        dish = get_object_or_404(PopularDishes, pk=dish_id)
-        cart_item, created = CartItem.objects.get_or_create(dish=dish)  # Get or create cart item
-        if not created:
-            cart_item.quantity += 1  # Increase quantity if item already exists in cart
-            cart_item.save()
+    # Add and Remove views here.
+    if request.method == 'POST':
+        if 'remove_item' in request.POST:
+            cart_item_id = request.POST.get('remove_item')
+            cart_item = get_object_or_404(CartItem, id=cart_item_id)
+            cart_item.delete()
+            return redirect('shopping-cart')
+
+        elif 'dish_id' in request.POST:
+            dish_id = request.POST.get('dish_id')
+            dish = get_object_or_404(PopularDishes, pk=dish_id)
+            cart_item, created = CartItem.objects.get_or_create(dish=dish, username=request.user)
+            if not created:
+                cart_item.quantity += 1
+                cart_item.save()
+            return redirect('shopping-cart')
 
 
     context = {
@@ -463,6 +502,7 @@ def shoppingcart(request, dish_id=None):
         'opEn': opEn,
         'blogObj': blogObj,
         'cart_items': cart_items,
+        'subtotal': subtotal,
     }
     return render(request, 'base/shopping-cart.html', context)
 

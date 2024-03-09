@@ -34,7 +34,8 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab-cart">
                             <form method="post" enctype="multipart/form-data">
-                                <h2>You have <span>2 items</span> in your order.</h2>
+                                {% csrf_token %}
+                                <h2>You have <span>{{ cart_items|length }} items</span> in your order.</h2>
                                 <div class="table-responsive-md">
                                     <table class="table table-bordered">
                                         <thead>
@@ -50,7 +51,7 @@
                                             {% for cart_item in cart_items %}
                                             <tr>
                                                 <td>
-                                                    <a href="#">
+                                                    <a href="{% url 'shop-details' shop_id=cart_item.dish.id  %}">
                                                         <img src="{{ cart_item.dish.dish_picture.url }}" class="img-fluid" alt="thumb" style="height: 130px; width: 130px;" title="thumb" />
                                                     </a>
                                                     <div class="name">
@@ -65,24 +66,26 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="text-center">$ {{ cart_item.dish.dish_price }}</td>
+                                                <td class="text-center">
+                                                    $ {{ cart_item.dish.dish_price|floatformat:"2" }}
+                                                </td>
                                                 <td class="text-center">
                                                     <p class="qtypara">
                                                         <span id="minus1" class="minus"><i class="icofont icofont-minus"></i></span>
-                                                        <input type="text" name="quantity" value="1" size="2" id="input-quantity1" class="form-control qty" />
+                                                        <input type="text" name="quantity" value="{{cart_item.quantity}}" size="2" id="input-quantity1" class="form-control qty" />
                                                         <span id="add1" class="add"><i class="icofont icofont-plus"></i></span>
                                                         <input type="hidden" name="product_id" value="1" />
                                                     </p>
                                                 </td>
                                                 <td class="text-center">${{ cart_item.item_total|floatformat:"2" }}</td>
                                                 <td class="text-center">
-                                                    <button type="button"><i class="icofont icofont-close-line"></i></button>
+                                                    <button type="submit" name="remove_item" value="{{ cart_item.id }}"><i class="icofont icofont-close-line"></i></button>
                                                 </td>
                                             </tr>
                                             {% endfor %}
                                             <tr>
                                                 <td colspan="5">
-                                                    <h3 class="text-right">SUBTOTAL - $46.50</h3>
+                                                    <h3 class="text-right">SUBTOTAL - ${{ subtotal|floatformat:"2" }}</h3>
                                                     <div class="buttons float-left">
                                                         <a href="{% url 'shop' %}" class="btn btn-theme btn-md btn-wide">Continue Shopping</a>
                                                     </div>

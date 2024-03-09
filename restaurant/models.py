@@ -247,7 +247,9 @@ class PopularDishes(models.Model):
 # New model for Cart Items
 class CartItem(models.Model):
     dish = models.ForeignKey(PopularDishes, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     quantity = models.PositiveIntegerField(default=1)
+    #date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.quantity} x {self.dish.dish_name}"

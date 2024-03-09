@@ -190,10 +190,14 @@
                             <div class="product-thumb">
                                 <div class="image">
                                     <a class="link" href="{% url 'shop-details' popularDish.id %}">
-                                        <img src="{{ popularDish.dish_picture.url }}" alt="Food image" title="Food image" class="img-fluid" />
+                                        <img src="{{ popularDish.dish_picture.url }}" alt="Food image" title="Food image" class="img-fluid" style="height:296px; width: 266px;" />
                                     </a>
                                     <div class="hoverbox">
-                                        <a class="btn btn-theme btn-md" href="#">Add To Cart</a>
+                                        <form method="POST" action="{% url 'shopping-cart' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="dish_id" value="{{ popularDish.id }}">
+                                            <button type="submit" class="btn btn-theme-alt btn-md">Add to Cart</button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="caption">
@@ -222,30 +226,25 @@
                         <div class="col-sm-12 col-12 text-center">
                             <!-- Pagination Start -->
                             <ul class="pagination justify-content-center">
+                                {% if popular_dishes.has_previous %}
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous"><i class="icofont icofont-double-left"></i></a>
+                                    <a class="page-link" href="?page={{ popular_dishes.previous_page_number }}" aria-label="Previous">
+                                        <i class="icofont icofont-double-left"></i>
+                                    </a>
                                 </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">01</a> 
+                                {% endif %}
+                                {% for num in popular_dishes.paginator.page_range %}
+                                <li class="page-item {% if popular_dishes.number == num %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
                                 </li>
+                                {% endfor %}
+                                {% if popular_dishes.has_next %}
                                 <li class="page-item">
-                                    <a class="page-link" href="#">02</a> 
+                                    <a class="page-link" href="?page={{ popular_dishes.next_page_number }}" aria-label="Next">
+                                        <i class="icofont icofont-double-right"></i>
+                                    </a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">03</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">04</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">...</a> 
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">18</a> 
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next"><i class="icofont icofont-double-right"></i></a>
-                                </li>
+                                {% endif %}
                             </ul>
                             <!-- Pagination End -->
                         </div>

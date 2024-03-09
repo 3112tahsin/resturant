@@ -250,7 +250,7 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ('dish',)
     list_display_links = ('dish',)
     list_per_page = 12
-    list_display = ('id', 'dish', 'quantity')
+    list_display = ('id', 'username', 'dish', 'quantity')
 
 admin.site.register(CartItem, CartAdmin)
 

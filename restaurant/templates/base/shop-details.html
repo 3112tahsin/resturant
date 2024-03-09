@@ -145,7 +145,7 @@
                     <div class="row shopdetail">
                         <div class="col-sm-5 col-12">
                             <div class="image">
-                                <img src="{{ shopDetails.details_picture.url }}" title="thumb image" alt="thumb image" class="img-fluid" />
+                                <img src="{{ shopDetails.details_picture.url }}" title="thumb image" alt="thumb image" class="img-fluid" style="width: 324px; height: 324px;" />
                             </div>
                         </div>
                         <div class="col-sm-7 col-12">
@@ -184,10 +184,13 @@
                                     <span id="add1" class="add"><i class="icofont icofont-plus"></i></span>
                                     <input type="hidden" name="product_id" value="1">
                                 </p>
-                                <div class="buttons">
-                                    <a href="#" class="btn btn-theme-alt btn-md">Order Now</a>
-                                    <a href="#" class="btn btn-theme-alt btn-md">Add to cart</a>
-                                </div>
+                                <form method="POST" action="{% url 'shopping-cart' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="dish_id" value="{{ shopDetails.id }}">
+                                    <button type="submit" class="btn btn-theme-alt btn-md">Order Now</button>
+                                    <input type="hidden" name="dish_id" value="{{ shopDetails.id }}">
+                                    <button type="submit" class="btn btn-theme-alt btn-md">Add to Cart</button>
+                                </form>
                             </div>
                         </div>
 
@@ -256,11 +259,11 @@
                             </div>
                         </div>
                     </div>
-
+                    {% if related_dishes %}
                     <div class="row">
                         <!-- Title Content Start -->
                         <div class="col-sm-12 commontop text-center">
-                            <h4>Recent  Food</h4>
+                            <h4>Related Food</h4>
                             <div class="divider style-1 center">
                                 <span class="hr-simple left"></span>
                                 <i class="icofont icofont-ui-press hr-icon"></i>
@@ -273,16 +276,20 @@
                             {% endfor %}
                         </div>
                         <!-- Title Content End -->
-                        {% for popularDish in popularDishes %}
+                        {% for popularDish in related_dishes %}
                         <!-- Single Product Start -->
                         <div class="product-layout product-grid col-lg-4 col-md-4 col-sm-6 col-12">
                             <div class="product-thumb">
                                 <div class="image">
                                     <a class="link" href="{% url 'shop-details' popularDish.id %}">
-                                        <img src="{{ popularDish.dish_picture.url }}" alt="Food image" title="Food image" class="img-fluid" />
+                                        <img src="{{ popularDish.dish_picture.url }}" alt="Food image" title="Food image" class="img-fluid" style="height: 281px; width: 253px;" />
                                     </a>
                                     <div class="hoverbox">
-                                        <a class="btn btn-theme btn-md" href="#">Add To Cart</a>
+                                        <form method="POST" action="{% url 'shopping-cart' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="dish_id" value="{{ popularDish.id }}">
+                                            <button type="submit" class="btn btn-theme-alt btn-md">Add to Cart</button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="caption">
@@ -304,6 +311,7 @@
                         <!-- Single Product End -->
                         {% endfor %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
