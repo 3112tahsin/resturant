@@ -3,6 +3,7 @@ from restaurant.forms import CommentForm, ContactForm, RegistrationForm, Reserva
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 from restaurant.models import About, AllSections, CartItem, ChooseUs, CommentBlog, CommentDish, DishesMenu, FunFactor, MenuCategory, Openhoure, PopularDishes, Testimonial, blogList, contact_Address, teamMembers
 
 # Create your views here.
@@ -461,7 +462,7 @@ def shopdetails(request , shop_id):
     }
     return render(request, 'base/shop-details.html', context)
 
-from django.contrib.auth.decorators import login_required
+
 @login_required(login_url='/login-page')
 # Shopping-cart page views here.
 def shoppingcart(request, dish_id=None):
