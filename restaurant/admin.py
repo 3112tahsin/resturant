@@ -6,7 +6,7 @@ from restaurant.models import About, AllSections, CartItem, ChooseUs, CommentBlo
 # Register your models here.
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'username', 'picture')
+    list_display = ('email', 'username', 'picture','password')
 
 admin.site.register(User, UserAdmin)
 
