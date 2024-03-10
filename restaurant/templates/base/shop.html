@@ -213,11 +213,11 @@
                                     <p class="des">{{ popularDish.dish_title }}</p>
                                     <p>{{ popularDish.details | slice:":75" }}</p>
                                     <p>
-                                        <form method="POST" action="{% url 'shopping-cart' %}">
+                                        <!-- <form method="POST" action="{% url 'shopping-cart' %}">
                                             {% csrf_token %}
                                             <input type="hidden" name="dish_id" value="{{ popularDish.id }}">
                                             <button type="submit" class="btn btn-theme btn-md">Add to Cart</button>
-                                        </form>
+                                        </form> -->
                                     </p>
                                 </div>
                             </div>
