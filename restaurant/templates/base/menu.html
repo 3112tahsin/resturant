@@ -46,7 +46,7 @@
                         <div class="item">
                             <!-- Box Start -->
                             <div class="box">
-                                <a href="{% url 'shop' %}"><img src="{{ popularDishes.dish_picture.url }}" alt="image" title="image" class="img-responsive" /></a>
+                                <a href="{% url 'shop' %}"><img src="{{ popularDishes.dish_picture.url }}" alt="image" title="image" style="width: 261px; height: 197px;" class="img-responsive" /></a>
                                 <div class="caption">
                                     <h4>{{ popularDishes.dish_name | slice:":16" }}</h4>
                                     <span>{{ popularDishes.details | slice:":75" }}</span>

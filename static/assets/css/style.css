@@ -5350,3 +5350,16 @@ li.dropdown-item.log:hover .text {
     display: none;
     border-radius: 2px;
 }
+
+
+.loginnow.message-done {
+    background: #f5f5f5;
+    padding: 50px;
+    border: 1px solid #e5e5e5;
+    height: 350px;
+    margin-bottom: 50px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+}
