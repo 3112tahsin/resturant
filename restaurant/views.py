@@ -360,7 +360,7 @@ def shop(request):
     blogObj = blogList.objects.all()
     allSections = AllSections.objects.all().order_by('-id')[:1]
     MenucAT = MenuCategory.objects.all().order_by('id')
-    popularDishes = PopularDishes.objects.all()
+    popularDishes = PopularDishes.objects.all().order_by('-id')
 
      # Search functionality
     query = request.GET.get('s')
@@ -618,7 +618,7 @@ def thankyou(request):
     return render(request, 'base/thank-you.html', context)
 
 # 404 page views here.
-def error404(request):
+def error404(request, exception):
     contactAddresses = contact_Address.objects.all().order_by('-id')[:1]
     testMonial = Testimonial.objects.all()
     opEn = Openhoure.objects.all()
@@ -631,5 +631,5 @@ def error404(request):
         'opEn': opEn,
         'blogObj': blogObj,
     }
-    return render(request, 'base/404.html', context)
+    return render(request, 'base/404.html', context , status=404)
 
