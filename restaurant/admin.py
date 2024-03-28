@@ -5,6 +5,12 @@ from restaurant.models import About, AllSections, CartItem, ChooseUs, CommentBlo
 
 # Register your models here.
 
+# Register your models here.
+admin.site.site_header  =  "Restaurant"  
+admin.site.site_title  =  "Restaurant"
+admin.site.index_title  =  "Welcome to Restaurant Admin"
+
+
 class UserAdmin(admin.ModelAdmin):
     list_display = ('email', 'username', 'picture','password')
 
